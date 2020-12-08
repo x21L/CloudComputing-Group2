@@ -1,4 +1,4 @@
-# CloudComputing-Group2
+# Cloud Computing Group2
 
 ---
 ## Team Members
