@@ -36,3 +36,25 @@ In order to make use of our separation into independent microservices, we additi
 each microservice into teams. This means each team member listed above is responsible for a single microservice and simulates
 an independent development team. Therefore, it might be the case, that the microservices are even developed in different 
 programming languages or use different tools.
+
+### Programming Languages
+
+* Java (Microservice)
+* .NET C# (Microservice)
+* Typescript (Frontent)
+
+### Container Orchestration
+
+* Kubernetes
+
+### Communication
+
+* The containers and the frontend communicate with each other using REST, HTTP(s).
+
+### Monolith
+
+* The source code of the monolith is not available as our idea of the application 
+is entirely concept based. This means we assume that the monolith application is an unmaintainable mess which requires
+single features to be extracted and moved to the cloud. In detail the application consists out of a PHP project
+which violates every kind of separations of concerns possible and comes without tests. An example would be a .php file
+containing some part of the presentation layer in HTML, some business logic validations and even database transactions. 
