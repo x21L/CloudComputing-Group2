@@ -41,7 +41,7 @@ programming languages or use different tools.
 
 * Java (Microservice)
 * .NET C# (Microservice)
-* Typescript (Frontent)
+* Typescript (Frontend)
 
 ### Container Orchestration
 
