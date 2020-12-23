@@ -1,0 +1,22 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  namespace: search-environment
+  name: elasticsearch
+spec:
+  version: 7.10.1
+  http:
+    service:
+      spec:
+        clusterIP: 10.100.1.1
+        type: ClusterIP
+  nodeSets:
+    - name: default
+      count: 1
+      config:
+        node.store.allow_mmap: false
+        xpack.security.authc:
+          anonymous:
+            username: anonymous
+            roles: superuser
+            authz_exception: false
