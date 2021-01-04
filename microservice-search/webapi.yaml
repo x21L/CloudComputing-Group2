@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: search-webapi
-          image: localhost:5000/search-webapi:1.4
+          image: localhost:5000/search-webapi:1.7
           ports:
             - containerPort: 80
 ---
