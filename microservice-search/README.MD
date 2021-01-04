@@ -37,13 +37,13 @@ Build the C# WebApi
 
 ```console
 cd webapi/BookStoreSearch
-docker build -f BookStoreSearch/Dockerfile -t localhost:5000/search-webapi:1.4 .
+docker build -f BookStoreSearch/Dockerfile -t localhost:5000/search-webapi:1.7 .
 ```
 
 Push the created C# WebApi Docker image into the mocked docker registry called localhost:5000  
 
 ```console
-docker push localhost:5000/search-webapi:1.4
+docker push localhost:5000/search-webapi:1.7
 ```
 
 Go back to the folder microservice-search
