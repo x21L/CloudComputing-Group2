@@ -19,9 +19,9 @@ import java.io.PrintWriter;
  */
 @WebServlet(name = "ServletShoppingCart", value = "/ShoppingCart")
 public class ServletShoppingCart extends HttpServlet {
-    Controller controller;
+    private final Controller controller;
 
-    public ServletShoppingCart() {
+    public ServletShoppingCart() throws ClassNotFoundException {
         controller = new Controller();
     }
 
@@ -47,6 +47,9 @@ public class ServletShoppingCart extends HttpServlet {
             case "getUser":
                 user = request.getParameter("user");
                 getBooksFromUser(response, user);
+            case "test":
+                test(response);
+                break;
             default:
                 errorMessage(response, action + " is not a valid parameter");
         }
@@ -60,6 +63,17 @@ public class ServletShoppingCart extends HttpServlet {
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println(controller.getJsonItems());
+        } catch (IOException e) {
+            errorMessage(response, e.getMessage());
+        }
+    }
+
+    private void test(HttpServletResponse response) {
+        response.setContentType("text");
+        response.setCharacterEncoding("UTF-8");
+
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println(controller.test());
         } catch (IOException e) {
             errorMessage(response, e.getMessage());
         }
