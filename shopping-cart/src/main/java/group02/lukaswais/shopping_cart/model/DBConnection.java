@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * @author Lukas Wais
  */
 public class DBConnection {
-    private static final String DB_URL = "jdbc:mysql://localhost:32769";
+    private static final String DB_URL = "jdbc:mysql://172.17.0.2:3306";
     private static DBConnection instance;
     private Connection connection;
 
