@@ -1,4 +1,4 @@
-name: .NET
+name: search_CICD
 
 on:
   push:
