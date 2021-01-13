@@ -6,14 +6,33 @@ on:
     - 'frontend-bookstore/**'
 
 jobs:
-  build:
+  build-and-publish:
+    name: build and publish
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - uses: actions/checkout@master
+      - name: npm install
+        uses: actions/npm@master
+        with:
+          args: install
+      - name: npm test
+        uses: actions/npm@master
+        with:
+          args: run test
+      - name: npm lint
+        uses: actions/npm@master
+        with:
+          args: run lint
+      - name: docker build
+        uses: actions/docker/cli@master
+        with:
+          args: build -t maexdock/bookstore-frontend .
+      - name: docker login
+        uses: actions/docker/login@master
+        env:
+          DOCKER_PASSWORD: $REGISTRY_PASSWORD
+          DOCKER_USERNAME: $REGISTRY_USER
+      - name: docker push
+        uses: actions/docker/cli@master
+        with:
+          args: push maexdock/bookstore-frontend
