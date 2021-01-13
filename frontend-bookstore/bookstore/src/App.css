@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,10 +43,20 @@
   box-sizing: border-box;
 }
 
-.books {
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.book {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
+  text-align: center;
 }
 
 .App-header h2 {
@@ -61,11 +71,6 @@
   font-size: 16px;
   padding: 8px;
   margin: 0 10px 30px 10px;
-}
-
-.books {
-  padding: 5px 25px 10px 25px;
-  max-width: 25%;
 }
 
 .errorMessage {
@@ -107,20 +112,20 @@ input[type="submit"]:hover {
 }
 
 @media screen and (min-width: 694px) and (max-width: 915px) {
-  .books {
+  .book {
     max-width: 33%;
   }
 }
 
 @media screen and (min-width: 652px) and (max-width: 693px) {
-  .books {
+  .book {
     max-width: 50%;
   }
 }
 
 
 @media screen and (max-width: 651px) {
-  .books {
+  .book {
     max-width: 100%;
     margin: auto;
   }
