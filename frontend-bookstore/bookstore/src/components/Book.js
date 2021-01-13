@@ -5,20 +5,19 @@ const DEFAULT_PLACEHOLDER_IMAGE =
 
 
 const Book = ({ book }) => {
-  const poster =
-    book.Poster === "N/A" ? DEFAULT_PLACEHOLDER_IMAGE : book.Poster;
   return (
     <div className="book">
       <h2>{book.name}</h2>
       <div>
         <img
-          width="200"
-          alt={`The book titled: ${book.name}`}
-          src={poster}
+          width="100"
+          alt={`Title: ${book.name}`}
+          src={"https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Closed_Book_Icon.svg/1200px-Closed_Book_Icon.svg.png"}
         />
       </div>
-      <p>({book.description})</p>
-      <p>({book.author})</p>
+      <p>Description: {book.description}</p>
+      <p>Author: {book.author}</p>
+      <hr/>
     </div>
   );
 };

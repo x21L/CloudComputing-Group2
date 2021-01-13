@@ -12,31 +12,46 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [searchValueString, setSearchValueString] = useState('All Books');
 
     useEffect(() => {
     fetch(BOOK_API_URL + `/search?query=*`)
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 204) { /* NO CONTENT */
+          setErrorMessage("NO CONTENT CAN BE FOUND!");
+          setLoading(false);
+          throw new Error('No Content');
+        } else {
+          return response.json();
+        }
+      })
       .then(jsonResponse => {
-        setBooks(jsonResponse.Search);
+        setBooks(jsonResponse);
         setLoading(false);
-      });
-  }, []);
+      })
+      .catch(error => console.log(error));
+    }, []);
 
     const search = searchValue => {
     setLoading(true);
     setErrorMessage(null);
+    setSearchValueString(searchValue);
 
     fetch(BOOK_API_URL + `/search?query=${searchValue}`)
-      .then(response => response.json())
-      .then(jsonResponse => {
-        if (jsonResponse.Response === "True") {
-          setBooks(jsonResponse.Search);
+      .then(response => {
+        if (response.status === 204) { /* NO CONTENT */
+          setErrorMessage("NO CONTENT CAN BE FOUND!");
           setLoading(false);
+          throw new Error('No Content');
         } else {
-          setErrorMessage(jsonResponse.Error);
-          setLoading(false);
+          return response.json();
         }
-      });
+      })
+      .then(jsonResponse => {
+        setBooks(jsonResponse);
+        setLoading(false);
+      })
+      .catch(error => console.log(error));
   	};
 
     
@@ -44,13 +59,13 @@ const App = () => {
      <div className="App">
       <Header text="Book-Store" />
       <Search search={search} />
-      <p className="App-intro">Search for Books</p>
-      <div className="books">
+      <p className="App-intro">Searchresults for: {searchValueString}</p>
+      <div className="Book">
         {loading && !errorMessage ? (
          <span>loading...</span>
          ) : errorMessage ? (
-          <div className="errorMessage">{errorMessage}</div>
-        ) : (
+         <div className="errorMessage">{errorMessage}</div>
+         ) : (
           books.map((book, index) => (
             <Book key={`${index}-${book.Title}`} book={book} />
           ))
