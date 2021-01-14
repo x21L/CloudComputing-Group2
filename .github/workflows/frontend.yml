@@ -8,6 +8,8 @@ on:
 jobs:
   path-context:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./frontend-bookstore/bookstore
     steps:
       -
         name: Checkout
@@ -28,7 +30,8 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
+          working-directory: ${{env.working-directory}}
           context: .
-          file: ./frontend-bookstore/bookstore/Dockerfile
+          file: ./Dockerfile
           push: true
-          tags: maexdock/bookstore-frontend:latest
+          tags: cloudcompdocker/bookstore-frontend:latest
