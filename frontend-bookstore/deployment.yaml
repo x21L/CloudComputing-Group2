@@ -18,3 +18,4 @@ spec:
         image: maexdock/bookstore-frontend:1.1
         ports:
         - containerPort: 3000
+        
