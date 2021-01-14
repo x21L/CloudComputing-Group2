@@ -5,27 +5,6 @@ on:
     paths:
     - 'frontend-bookstore/**'
 
-env:
-  SERVICE_KEY: |
-              { 
-                "type": "service_account", 
-                "project_id": "plenary-line-297414",
-                "private_key_id": "d5ea8e81e5af8b43bbdb948d79f8d2d017d578b1"}
-                
-                "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvurg03pk8I3JD\nW+LjSAHWTceSnKsk5eGuvEqf6+KKmEFZzv6GsR3bBh0w0qS5TEpQ2dZrbk8PlYfG\nRK98z4z3pEWUEbdJEgYrarx8jXcQjsgytDTjO3N4zvdPEc7h48nf0kKPptXaYfju\ngXi11oIEwHqYIjq0If4dtWBbnjURlH9oY9Qgur2gxRqIMPhtVt1zwvcf35jAmd8v\nm9JsHHhRqOrPyWqkSHeM5y8gkTGEGXwbwcBWer5MNMCnFe2PtISdYQCqxAqbhRce\nKCCByykE+7pO65Dz5+5GQ/UGoLdyVWvZsylVRj/uhkMIvlJBcoAjUQ96uEVfjy2T\nqoAo4iI1AgMBAAECggEAFSDbwazl5aopXy9EEf74DD6Lzp/m9T0X1meDMsPXbWyC\n/FD79KaE/W7jFu9XU4QjB0zkZURSXdWlCSdRpi2vjZ2C/sY72vLqKlGKBLu0OMRs\nuP6bwUUboXHY9aPMKQgMn0xA09QZBZ8eoVE7JI8m+3qdAtT9aT0RDZy0z4SFGEN8\neUyMWd+zbpfVtj+vw6VohQ7YWB495VWKhnpVpHnMWrJhlTSgFCTJpF9MT4t6FqrJ\nxivwJ8D3HWG8KBBQTW8MD1rANgUv6o6JVxtSz7N65LOugSx5a7fFWjy9qPPYIsWP\ny1dPN7F6BStkgxvxUGr6ISu8Zm0sluOQ8LmzA+tB/QKBgQDYXYUmOGAV+xFuK4Ye\nibNlqXVtCbiXfeHH3Vb6vb7Whj4o/PvnBVxJ8uOPm4tESY6plA3jiQawOeDtwjjx\n2SgG3iOrVYMzCbYWBUvOFByOMdJuNoUpqUIfJuOcalW6chydnZKER2J1/TQ4MEhS\n51PWKXccr7qPH0HhCLLahzxPrwKBgQDP65JaZeOCSVw/RemQj/Es69HBWdm/EsMv\nZRWcYnU2pwnNQxZ2sqL/uO87A/wo1HS8xlmhfPxcL00oLu7XEvT4N2DIIkE5IW0m\n1sHQWpG5hU+CEE+e1IYAF/R/dI2/6beRosRIbc5rrAfF0sK41Dw7iAPwDwDzDp8n\nhJbyi2fhWwKBgBEpKbxkUEquBS3lydd2OIJhtGyXjsqFM3k0twdgMVi2gQujNR+X\nr0A2QZJMVflulCAjHA7l+V/U12BEPVwBS0lwKQgX2jYcGRMaDG8l7TXiAby4Gku5\nnwL1hKwNSwtkrZxauRpAxzBwisnCGppoup+L3mSqE3PymLkOhZELlN8FAoGBAKUg\n8XYL75lcy/+QdcQTHbbQfyExS+cdbpjojjZKV88U8IrtmhyhGSVBafYT3yNKQIBg\ng3Tmv8Iy6vNb+uIjMx0jViD8W5KVAoxTCVCBbbTKtG+WprV9EgNnAw5qsd1WMC1g\n+MSRONx4nx+0mGOUY1XgW0g/kkB3P11yRzPQFat7AoGARzgSsU/jf6DVwPX6gbki\n5DQ6QluPkJF1fk0XMgtT4gVlTcRMIcuQfyiI8OgFPfh9W62T0BRo7YN9hyyWWmJO\nvOY6wLEcUJw+lXuf+1IXmSqXePGl8B51lRr4oR5gIyc16IVdKbrwQHhGmd0x7sat\nK2GCRft29lWNIwHBgAcExk0=\n-----END PRIVATE KEY-----\n",
-                "client_email": "902628524523-compute@developer.gserviceaccount.com",
-                "client_id": "117688199037302811425",
-                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-                "token_uri": "https://oauth2.googleapis.com/token",
-                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-                "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/902628524523-compute%40developer.gserviceaccount.com"
-              }
-  PROJECT_ID: plenary-line-297414
-  GKE_CLUSTER: cluster-1
-  GKE_ZONE: us-central1-c
-  DEPLOYMENT_NAME: bookstore-frontend
-  NAMESPACE: frontend-environment
-
 jobs:
   path-context:
     runs-on: ubuntu-latest
@@ -57,11 +36,10 @@ jobs:
         with:
           version: '290.0.1'
           service_account_key: |
-              { 
-                "type": "service_account", 
+              {
+                "type": "service_account",
                 "project_id": "plenary-line-297414",
-                "private_key_id": "d5ea8e81e5af8b43bbdb948d79f8d2d017d578b1"}
-                
+                "private_key_id": "d5ea8e81e5af8b43bbdb948d79f8d2d017d578b1",
                 "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvurg03pk8I3JD\nW+LjSAHWTceSnKsk5eGuvEqf6+KKmEFZzv6GsR3bBh0w0qS5TEpQ2dZrbk8PlYfG\nRK98z4z3pEWUEbdJEgYrarx8jXcQjsgytDTjO3N4zvdPEc7h48nf0kKPptXaYfju\ngXi11oIEwHqYIjq0If4dtWBbnjURlH9oY9Qgur2gxRqIMPhtVt1zwvcf35jAmd8v\nm9JsHHhRqOrPyWqkSHeM5y8gkTGEGXwbwcBWer5MNMCnFe2PtISdYQCqxAqbhRce\nKCCByykE+7pO65Dz5+5GQ/UGoLdyVWvZsylVRj/uhkMIvlJBcoAjUQ96uEVfjy2T\nqoAo4iI1AgMBAAECggEAFSDbwazl5aopXy9EEf74DD6Lzp/m9T0X1meDMsPXbWyC\n/FD79KaE/W7jFu9XU4QjB0zkZURSXdWlCSdRpi2vjZ2C/sY72vLqKlGKBLu0OMRs\nuP6bwUUboXHY9aPMKQgMn0xA09QZBZ8eoVE7JI8m+3qdAtT9aT0RDZy0z4SFGEN8\neUyMWd+zbpfVtj+vw6VohQ7YWB495VWKhnpVpHnMWrJhlTSgFCTJpF9MT4t6FqrJ\nxivwJ8D3HWG8KBBQTW8MD1rANgUv6o6JVxtSz7N65LOugSx5a7fFWjy9qPPYIsWP\ny1dPN7F6BStkgxvxUGr6ISu8Zm0sluOQ8LmzA+tB/QKBgQDYXYUmOGAV+xFuK4Ye\nibNlqXVtCbiXfeHH3Vb6vb7Whj4o/PvnBVxJ8uOPm4tESY6plA3jiQawOeDtwjjx\n2SgG3iOrVYMzCbYWBUvOFByOMdJuNoUpqUIfJuOcalW6chydnZKER2J1/TQ4MEhS\n51PWKXccr7qPH0HhCLLahzxPrwKBgQDP65JaZeOCSVw/RemQj/Es69HBWdm/EsMv\nZRWcYnU2pwnNQxZ2sqL/uO87A/wo1HS8xlmhfPxcL00oLu7XEvT4N2DIIkE5IW0m\n1sHQWpG5hU+CEE+e1IYAF/R/dI2/6beRosRIbc5rrAfF0sK41Dw7iAPwDwDzDp8n\nhJbyi2fhWwKBgBEpKbxkUEquBS3lydd2OIJhtGyXjsqFM3k0twdgMVi2gQujNR+X\nr0A2QZJMVflulCAjHA7l+V/U12BEPVwBS0lwKQgX2jYcGRMaDG8l7TXiAby4Gku5\nnwL1hKwNSwtkrZxauRpAxzBwisnCGppoup+L3mSqE3PymLkOhZELlN8FAoGBAKUg\n8XYL75lcy/+QdcQTHbbQfyExS+cdbpjojjZKV88U8IrtmhyhGSVBafYT3yNKQIBg\ng3Tmv8Iy6vNb+uIjMx0jViD8W5KVAoxTCVCBbbTKtG+WprV9EgNnAw5qsd1WMC1g\n+MSRONx4nx+0mGOUY1XgW0g/kkB3P11yRzPQFat7AoGARzgSsU/jf6DVwPX6gbki\n5DQ6QluPkJF1fk0XMgtT4gVlTcRMIcuQfyiI8OgFPfh9W62T0BRo7YN9hyyWWmJO\nvOY6wLEcUJw+lXuf+1IXmSqXePGl8B51lRr4oR5gIyc16IVdKbrwQHhGmd0x7sat\nK2GCRft29lWNIwHBgAcExk0=\n-----END PRIVATE KEY-----\n",
                 "client_email": "902628524523-compute@developer.gserviceaccount.com",
                 "client_id": "117688199037302811425",
@@ -77,4 +55,4 @@ jobs:
       - 
         name: Deploy
         run: |-
-          kubectl apply -f ./frontend-bookstore/deployment.yaml
+          kubectl apply -f ./frontend-bookstore/deployment.yaml --namespace frontend-environment
