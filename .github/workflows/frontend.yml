@@ -25,7 +25,6 @@ env:
   GKE_ZONE: us-central1-c
   DEPLOYMENT_NAME: bookstore-frontend
   NAMESPACE: frontend-environment
-  IMAGE: cloudcompdocker/bookstore-frontend:latest
 
 jobs:
   path-context:
@@ -52,7 +51,7 @@ jobs:
         with:
           context: ./frontend-bookstore/bookstore
           push: true
-          tags: $IMAGE
+          tags: cloudcompdocker/bookstore-frontend:latest
       - 
         uses: google-github-actions/setup-gcloud@master
         with:
