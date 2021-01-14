@@ -30,4 +30,4 @@ jobs:
         with:
           context: ./frontend-bookstore/bookstore
           push: true
-          tags: cloudcompdocker/bookstore-frontend:0.0
+          tags: cloudcompdocker/bookstore-frontend:latest
