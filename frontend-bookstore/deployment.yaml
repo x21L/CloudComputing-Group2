@@ -21,7 +21,7 @@ spec:
       containers:
       - name: bookstore-frontend
         image: cloudcompdocker/bookstore-frontend:latest
-        imagePullPolicy: "Always"
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         readinessProbe:

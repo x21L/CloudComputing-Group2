@@ -55,4 +55,4 @@ jobs:
       - 
         name: Deploy
         run: |-
-          kubectl apply -f ./frontend-bookstore/deployment.yaml --namespace frontend-environment
+          kubectl rollout restart -f ./frontend-bookstore/deployment.yaml --namespace frontend-environment
