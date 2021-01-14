@@ -57,7 +57,7 @@ const App = () => {
     
     return (
      <div className="App">
-      <Header text="Book-Store" />
+      <Header text="Book-Store CHANGED" />
       <Search search={search} />
       <p className="App-intro">Searchresults for: {searchValueString}</p>
       <div className="Book">
