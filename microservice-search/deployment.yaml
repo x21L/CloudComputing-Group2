@@ -21,5 +21,6 @@ spec:
       containers:
         - name: search-webapi
           image: cloudcompdocker/search-webapi:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
