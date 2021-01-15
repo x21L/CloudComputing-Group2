@@ -5,7 +5,7 @@ import Book from "./Book";
 import Search from "./Search";
 
 
-const BOOK_API_URL = "http://127.0.0.1:8080/api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
+const BOOK_API_URL = "10.8.13.106/api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
 
 
 const App = () => {
