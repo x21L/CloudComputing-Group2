@@ -59,7 +59,7 @@ const App = () => {
      <div className="App">
       <Header text="Book-Store" />
       <Search search={search} />
-      <p className="App-intro">V4 Searchresults for: {searchValueString}</p>
+      <p className="App-intro">V5 Searchresults for: {searchValueString}</p>
       <div className="Book">
         {loading && !errorMessage ? (
          <span>loading...</span>
