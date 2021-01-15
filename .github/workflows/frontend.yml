@@ -1,6 +1,7 @@
 name: frontend_CICD
 
 on:
+  workflow_dispatch:
   push:
     paths:
     - 'frontend-bookstore/**'
