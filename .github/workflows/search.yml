@@ -49,7 +49,8 @@ jobs:
           kubectl apply -f https://download.elastic.co/downloads/eck/1.3.0/all-in-one.yaml
           kubectl apply -f ./microservice-search/elasticsearch.yaml
           kubectl apply -f ./microservice-search/service.yaml
+          kubectl apply -f ./microservice-search/deployment.yaml
       - 
         name: Deploy
         run: |-
-          kubectl rollout -f ./microservice-search/deployment.yaml --namespace search-environment
+          kubectl rollout restart -f ./microservice-search/deployment.yaml --namespace search-environment
