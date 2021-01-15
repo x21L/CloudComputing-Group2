@@ -35,8 +35,8 @@ jobs:
         uses: google-github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
-          service_account_key: ${{ secrets.GK_PROJECT_ID }}
-          project_id: ${{ secrets.GK_KEY }}
+          service_account_key: ${{ secrets.GK_KEY }}
+          project_id: ${{ secrets.GK_PROJECT_ID }}
       - 
         run: |-
           gcloud container clusters get-credentials "cluster-1" --zone "us-central1-c"
