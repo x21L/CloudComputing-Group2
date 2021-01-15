@@ -8,10 +8,10 @@ spec:
   ports:
     - port: 80
       protocol: TCP
-      targetPort: 8888
+      targetPort: 8080
   selector:
     app: tomcat-shoppingcart
-  type: ClusterIP
+  type: LoadBalancer
   ---
   # mysql
   apiVersion: v1
