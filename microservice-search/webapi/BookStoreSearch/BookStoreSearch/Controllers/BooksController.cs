@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using BookStoreSearch.Contract;
 using BookStoreSearch.Entity;
@@ -33,6 +34,25 @@ namespace BookStoreSearch.Controllers
             }
 
             return Ok(item);
+        }
+
+        /// <summary>
+        /// Imports new books to the storage.
+        /// </summary>
+        /// <returns>200 with book data payload.</returns>
+        [HttpPost]
+        [Route("/import")]
+        public async Task<ActionResult> Import([FromBody] List<Book> books)
+        {
+            var results = new List<Book>();
+
+            foreach (var book in books)
+            {
+                var result = await _searchService.AddOrUpdate(book);
+                results.Add(result);
+            }
+
+            return Ok(results);
         }
 
         /// <summary>
