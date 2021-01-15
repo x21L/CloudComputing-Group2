@@ -53,4 +53,3 @@ jobs:
         name: Deploy
         run: |-
           kubectl rollout restart -f ./microservice-search/deployment.yaml --namespace search-environment
-          kubectl rollout restart deployment
