@@ -32,7 +32,7 @@ const App = () => {
       })
       .catch(error => {
           console.log('Search-Error: ' + error);
-          setErrorMessage(error);
+          setErrorMessage('' + error);
         });
     }, []);
 
