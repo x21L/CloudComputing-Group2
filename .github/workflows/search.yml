@@ -56,6 +56,7 @@ jobs:
           kubectl rollout restart -f ./microservice-search/deployment.yaml --namespace search-environment
 
       - name: Import Test Data
+        if: "contains(github.event.head_commit.message, '--testdata')"
         run: |-
             sudo apt-get install curl
             curl -X POST -H "Content-Type: application/json" -d @./microservice-search/data.json http://35.193.104.75:8080/import -v
