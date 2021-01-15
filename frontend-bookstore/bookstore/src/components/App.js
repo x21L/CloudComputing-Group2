@@ -5,7 +5,7 @@ import Book from "./Book";
 import Search from "./Search";
 
 
-const BOOK_API_URL = "https://10.8.13.106/api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
+const BOOK_API_URL = "https://34.121.83.50:8080//api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
 
 
 const App = () => {
@@ -60,7 +60,7 @@ const App = () => {
      <div className="App">
       <Header text="Book-Store" />
       <Search search={search} />
-      <p className="App-intro">Searchresults for: {searchValueString}</p>
+      <p className="App-intro">- Searchresults for: {searchValueString}</p>
       <div className="Book">
         {loading && !errorMessage ? (
          <span>loading...</span>
