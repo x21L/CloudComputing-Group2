@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BookStoreSearch.Contract;
 using BookStoreSearch.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace BookStoreSearch.Controllers
 {
@@ -44,6 +45,17 @@ namespace BookStoreSearch.Controllers
         [Route("/import")]
         public async Task<ActionResult> Import([FromBody] List<Book> books)
         {
+            var storedData = await _searchService.Search("*", new SearchSettings
+            {
+                From = 0,
+                Size = 100
+            });
+            
+            foreach(var item in storedData)
+            {
+                await _searchService.Delete(item.Id);
+            }
+            
             var results = new List<Book>();
 
             foreach (var book in books)
