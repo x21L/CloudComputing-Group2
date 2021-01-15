@@ -9,16 +9,22 @@ spec:
   selector:
     matchLabels:
       app: tomcat-shoppingcart
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
         app: tomcat-shoppingcart
-    spec:
-      containers:
-        - name: tomcat-shoppingcart
-          image: localhost:5000/tomcat-shoppingcart:1.0
-          ports:
-            - containerPort: 8888
+  spec:
+    containers:
+      - name: search-webapi
+        image: cloudcompdocker/tomcat-shoppingcart:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
 ---
 # mysql
 apiVersion: apps/v1
@@ -31,13 +37,19 @@ spec:
   selector:
     matchLabels:
       app: mysql-shoppingcart
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
         app: mysql-shoppingcart
-    spec:
-      containers:
-        - name: mysql-shoppingcart
-          image: localhost:5000/mysql-shoppingcart:1.0
-          ports:
-            - containerPort: 3306
+  spec:
+    containers:
+      - name: search-webapi
+        image: cloudcompdocker/mysql-shoppingcart:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 3306
