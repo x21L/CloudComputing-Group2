@@ -5,7 +5,7 @@ import Book from "./Book";
 import Search from "./Search";
 
 
-const BOOK_API_URL = "10.8.13.106/api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
+const BOOK_API_URL = "https://10.8.13.106/api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
 
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
     useEffect(() => {
     fetch(BOOK_API_URL + `/search?query=*`)
       .then(response => {
+        console.log('got status: ', response.status)
         if (response.status === 204) { /* NO CONTENT */
           setErrorMessage("NO CONTENT CAN BE FOUND!");
           setLoading(false);
