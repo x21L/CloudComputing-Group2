@@ -55,11 +55,18 @@ namespace BookStoreSearch.Controllers
                 Size = size
             };
 
-            var result = await _searchService.Search(query, settings);
-
-            if (result.Any())
+            try
             {
-                return Ok(result);
+                var result = await _searchService.Search(query, settings);
+
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+            }
+            catch (System.Exception e)
+            {
+                return StatusCode(502, e.ToString());
             }
 
             return StatusCode((int)HttpStatusCode.NoContent);
