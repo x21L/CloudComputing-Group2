@@ -14,6 +14,7 @@ public class DatabaseController {
     public DatabaseController() throws ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         this.connection = DBConnection.getInstance().getConnection();
+        createTable();
     }
 
     public ResultSet getAll() {
@@ -42,6 +43,17 @@ public class DatabaseController {
             statement.executeQuery("insert into mysql.shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private void createTable() {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(String.format("CREATE TABLE IF NO EXISTS %s ("
+                            + "%s VARCHAR(128) PRIMARY KEY, "
+                            + "%s VARCHAR(128) PRIMARY KEY) ",
+                    "shopping_cart", "user_id", "IBAN"));
+        } catch (SQLException throwables) {
+            System.out.println("Could not create table \n" + throwables.getMessage());
         }
     }
 }
