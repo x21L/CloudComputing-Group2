@@ -1,6 +1,7 @@
 name: search_CICD
 
 on:
+  workflow_dispatch:
   push:
     paths:
      - 'microservice-search/**'
