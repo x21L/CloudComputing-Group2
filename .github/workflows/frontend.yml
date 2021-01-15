@@ -43,6 +43,7 @@ jobs:
       - 
         name: Update Deployment and Services
         run: |-
+          kubectl apply -f ./frontend-bookstore/namespace.yaml
           kubectl apply -f ./frontend-bookstore/deployment.yaml
           kubectl apply -f ./frontend-bookstore/service.yaml
       - 
