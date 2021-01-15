@@ -30,7 +30,10 @@ const App = () => {
         setBooks(jsonResponse);
         setLoading(false);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+          console.log('Search-Error: ' + error);
+          setErrorMessage(error);
+        });
     }, []);
 
     const search = searchValue => {
@@ -60,7 +63,7 @@ const App = () => {
      <div className="App">
       <Header text="Book-Store" />
       <Search search={search} />
-      <p className="App-intro">- Searchresults for: {searchValueString}</p>
+      <p className="App-intro">Searchresults for: {searchValueString}</p>
       <div className="Book">
         {loading && !errorMessage ? (
          <span>loading...</span>
