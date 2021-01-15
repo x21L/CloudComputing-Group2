@@ -32,7 +32,7 @@ jobs:
           context: ./microservice-search/webapi/BookStoreSearch/
           file: microservice-search/webapi/BookStoreSearch/BookStoreSearch/Dockerfile
           push: true
-          tags: cloudcompdocker/search-webapi-tmp:latest
+          tags: cloudcompdocker/search-webapi:latest
       - 
         uses: google-github-actions/setup-gcloud@master
         with:
