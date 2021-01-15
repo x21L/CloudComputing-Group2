@@ -1,6 +1,7 @@
 name: search_CICD
 
 on:
+  workflow_dispatch:
   push:
     paths:
      - 'microservice-search/**'
@@ -29,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./microservice-search/webapi/BookStoreSearch/
-          file: BookStoreSearch/Dockerfile
+          file: microservice-search/webapi/BookStoreSearch/BookStoreSearch/Dockerfile
           push: true
           tags: cloudcompdocker/search-webapi:latest
       - 
