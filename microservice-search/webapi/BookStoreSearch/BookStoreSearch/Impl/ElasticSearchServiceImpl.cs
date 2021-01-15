@@ -17,7 +17,7 @@ namespace BookStoreSearch.Impl
     {
         // https://www.elastic.co/de/blog/a-practical-introduction-to-elasticsearch
         private const string IndexName = "bookindex";
-        private const string BaseUrl = "https://10.8.7.122:9200";
+        private const string BaseUrl = "http://10.8.7.122:9200";
        // private const string BaseUrl = "https://127.0.0.1:9200";
         private const int TimeOutSeconds = 20;
         
