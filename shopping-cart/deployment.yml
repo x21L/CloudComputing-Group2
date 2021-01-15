@@ -1,0 +1,43 @@
+# tomcat
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shoppingcart-environment
+  name: shoppingcart-tomcat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat-shoppingcart
+  template:
+    metadata:
+      labels:
+        app: tomcat-shoppingcart
+    spec:
+      containers:
+        - name: tomcat-shoppingcart
+          image: localhost:5000/tomcat-shoppingcart:1.0
+          ports:
+            - containerPort: 8888
+---
+# mysql
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shoppingcart-environment
+  name: shoppingcart-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-shoppingcart
+  template:
+    metadata:
+      labels:
+        app: mysql-shoppingcart
+    spec:
+      containers:
+        - name: mysql-shoppingcart
+          image: localhost:5000/mysql-shoppingcart:1.0
+          ports:
+            - containerPort: 3306
