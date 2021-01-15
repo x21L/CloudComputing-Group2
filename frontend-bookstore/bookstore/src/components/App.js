@@ -5,7 +5,7 @@ import Book from "./Book";
 import Search from "./Search";
 
 
-const BOOK_API_URL = "http://35.193.104.75:8080/api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
+const BOOK_API_URL = "http://35.193.104.75:8080/api";
 
 
 const App = () => {
@@ -40,6 +40,9 @@ const App = () => {
     setLoading(true);
     setErrorMessage(null);
     setSearchValueString(searchValue);
+
+    if (searchValue == "")
+      searchValue = "*"
 
     fetch(BOOK_API_URL + `/search?query=${searchValue}`)
       .then(response => {
