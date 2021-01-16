@@ -8,6 +8,11 @@ spec:
   selector:
     matchLabels:
       app: search-webapi
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -16,19 +21,6 @@ spec:
       containers:
         - name: search-webapi
           image: cloudcompdocker/search-webapi:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: search-environment
-  name: search-webapi
-spec:
-  ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 80
-  selector:
-    app: search-webapi
-  type: ClusterIP
