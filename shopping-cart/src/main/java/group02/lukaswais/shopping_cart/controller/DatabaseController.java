@@ -14,7 +14,7 @@ public class DatabaseController {
     public DatabaseController() throws ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         this.connection = DBConnection.getInstance().getConnection();
-        createTable();
+        // createTable();
     }
 
     public ResultSet getAll() {
