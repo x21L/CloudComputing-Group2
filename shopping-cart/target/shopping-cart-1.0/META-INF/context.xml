@@ -1,5 +1,5 @@
 <Context>
-    <Resource name="jdbc/mysql"
+    <Resource name="jdbc/books"
               auth="Container"
               type="javax.sql.DataSource"
               username="root"
