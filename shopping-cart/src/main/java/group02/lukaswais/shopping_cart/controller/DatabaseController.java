@@ -14,7 +14,7 @@ public class DatabaseController {
     public DatabaseController() throws ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         this.connection = DBConnection.getInstance().getConnection();
-      //  createTable();
+        createTable();
     }
 
     public ResultSet getAll() {
@@ -48,7 +48,7 @@ public class DatabaseController {
 
     private void createTable() {
         try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("CREATE DATABASE IF NOT EXISTS books" +
+            statement.execute(String.format("CREATE SCHEMA IF NOT EXISTS books" +
                             "USE books" +
                             "CREATE TABLE IF NO EXISTS %s ("
                             + "%s VARCHAR(128) PRIMARY KEY, "
