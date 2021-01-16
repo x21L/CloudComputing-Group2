@@ -34,14 +34,14 @@ jobs:
           push: true
           tags: cloudcompdocker/shoppingcart-webapi:latest
       -
-        name: Build and Push WebApi
+        name: Build and Push Database
         uses: docker/build-push-action@v2
         with:
-          context: ./shopping-cart
-          file: shopping-cart/Dockerfile
+          context: ./shopping-cart/db
+          file: shopping-cart/db/Dockerfile
           push: true
-          tags: cloudcompdocker/shoppingcart-webapi:latest
-     - 
+          tags: cloudcompdocker/shoppingcart-database:latest
+      - 
         uses: google-github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
@@ -53,18 +53,10 @@ jobs:
       - 
         name: Update Deployment and Services
         run: |-
-          kubectl apply -f ./microservice-search/namespace.yaml
-          kubectl apply -f https://download.elastic.co/downloads/eck/1.3.0/all-in-one.yaml
-          kubectl apply -f ./microservice-search/elasticsearch.yaml
-          kubectl apply -f ./microservice-search/service.yaml
-          kubectl apply -f ./microservice-search/deployment.yaml
+          kubectl apply -f ./shopping-cart/namespace.yaml
+          kubectl apply -f ./shopping-cart/service.yaml
+          kubectl apply -f ./shopping-cart/deployment.yaml
       - 
         name: Deploy
         run: |-
-          kubectl rollout restart -f ./microservice-search/deployment.yaml --namespace search-environment
-
-      - name: Import Test Data
-        if: "contains(github.event.head_commit.message, '--testdata')"
-        run: |-
-            sudo apt-get install curl
-            curl -X POST -H "Content-Type: application/json" -d @./microservice-search/data.json http://35.193.104.75:8080/import -v
+          kubectl rollout restart -f ./shopping-cart/deployment.yaml --namespace shoppingcart-environment
