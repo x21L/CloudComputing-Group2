@@ -10,7 +10,8 @@ import java.sql.SQLException;
  * @author Lukas Wais
  */
 public class DBConnection {
-    private static final String DB_URL = "jdbc:mysql://172.17.0.2:3306";
+    // not sure about the url...
+    private static final String DB_URL = "jdbc:mysql://shoppingcart-environment.mysql-shoppingcart:3306";
     private static DBConnection instance;
     private Connection connection;
 
