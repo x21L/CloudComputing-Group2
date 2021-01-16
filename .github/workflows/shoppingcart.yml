@@ -53,9 +53,9 @@ jobs:
       - 
         name: Update Deployment and Services
         run: |-
-          kubectl apply -f ./shopping-cart/namespace.yml
-          kubectl apply -f ./shopping-cart/service.yml
-          kubectl apply -f ./shopping-cart/deployment.yml
+          kubectl apply -f ./shopping-cart/namespace.yaml
+          kubectl apply -f ./shopping-cart/service.yaml
+          kubectl apply -f ./shopping-cart/deployment.yaml
       - 
         name: Deploy
         run: |-
