@@ -48,7 +48,7 @@ public class DatabaseController {
 
     private void createTable() {
         try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("CREATE SCHEMA IF NOT EXISTS books" +
+            statement.execute(String.format("CREATE TABLE IF NOT EXIST books" +
                             "USE books" +
                             "CREATE TABLE IF NO EXISTS %s ("
                             + "%s VARCHAR(128) PRIMARY KEY, "
