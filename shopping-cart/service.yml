@@ -25,4 +25,4 @@ spec:
         targetPort: 3306
     selector:
       app: tomcat-shoppingcart
-    type: LoadBalancer
+    type: ClusterIP
