@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class DBConnection {
     // not sure about the url...
-    private static final String DB_URL = "jdbc:mysql://shoppingcart-environment.mysql-shoppingcart:3306";
+    private static final String DB_URL = "jdbc:mysql://10.8.11.20:3306";
     private static DBConnection instance;
     private Connection connection;
 
