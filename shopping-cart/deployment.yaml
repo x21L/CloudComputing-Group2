@@ -18,13 +18,13 @@ spec:
     metadata:
       labels:
         app: tomcat-shoppingcart
-  spec:
-    containers:
-      - name: search-webapi
-        image: cloudcompdocker/shoppingcart-webapi:latest
-        imagePullPolicy: Always
-        ports:
-          - containerPort: 8080
+    spec:
+      containers:
+        - name: search-webapi
+          image: cloudcompdocker/shoppingcart-webapi:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
 ---
 # mysql
 apiVersion: apps/v1
