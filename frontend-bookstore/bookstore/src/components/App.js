@@ -5,7 +5,7 @@ import Book from "./Book";
 import Search from "./Search";
 
 
-const BOOK_API_URL = "https://10.8.13.106/api"; // https://www.omdbapi.com/?s=man&apikey=4a3b711b
+const BOOK_API_URL = "http://35.193.104.75:8080/api";
 
 
 const App = () => {
@@ -30,13 +30,19 @@ const App = () => {
         setBooks(jsonResponse);
         setLoading(false);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+          console.log('Search-Error: ' + error);
+          setErrorMessage('' + error);
+        });
     }, []);
 
     const search = searchValue => {
     setLoading(true);
     setErrorMessage(null);
     setSearchValueString(searchValue);
+
+    if (searchValue == "")
+      searchValue = "*"
 
     fetch(BOOK_API_URL + `/search?query=${searchValue}`)
       .then(response => {
