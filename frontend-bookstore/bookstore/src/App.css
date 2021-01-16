@@ -2,39 +2,15 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* new css for books component */
@@ -111,6 +87,7 @@ input[type="submit"]:hover {
   min-width: 170px;
 }
 
+
 @media screen and (min-width: 694px) and (max-width: 915px) {
   .book {
     max-width: 33%;
@@ -123,10 +100,54 @@ input[type="submit"]:hover {
   }
 }
 
-
 @media screen and (max-width: 651px) {
   .book {
     max-width: 100%;
     margin: auto;
   }
+}
+
+#shopButton_true {
+  border: none;
+  min-height: 50px;
+  min-width: 50px;
+  align-items: right;
+  float: right;
+  background-image: url( 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/OOjs_UI_icon_close.svg/480px-OOjs_UI_icon_close.svg.png' );
+  background-size: 50px 50px;
+}
+
+#shopButton_false {
+  border: none;
+  min-height: 50px;
+  min-width: 50px;
+  align-items: right;
+  float: right;
+  background-image: url( 'https://icons-for-free.com/iconfiles/png/512/cart+ecommerce+shop+icon-1320166083122274571.png' );
+  background-size: 50px 50px;
+}
+
+#buyBook {
+  border: none;
+  min-height: 50px;
+  min-width: 50px;
+  background-image: url( https://icons-for-free.com/iconfiles/png/512/buy-131964784705748631.png );
+  background-size: 50px 50px;
+}
+
+#shopPic {
+  float: left;
+  margin-right: 20px;
+}
+
+.shopBook {
+  text-align: left;
+}
+
+#removeBook {
+  border: none;
+  min-height: 50px;
+  min-width: 50px;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/VisualEditor_-_Icon_-_Remove.svg/1200px-VisualEditor_-_Icon_-_Remove.svg.png);
+  background-size: 50px 50px;
 }
