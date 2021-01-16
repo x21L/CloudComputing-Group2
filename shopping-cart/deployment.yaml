@@ -20,7 +20,7 @@ spec:
         app: tomcat-shoppingcart
     spec:
       containers:
-        - name: search-webapi
+        - name: shoppingcart-environment
           image: cloudcompdocker/shoppingcart-webapi:latest
           imagePullPolicy: Always
           ports:
@@ -48,7 +48,7 @@ spec:
         app: mysql-shoppingcart
     spec:
       containers:
-        - name: search-webapi
+        - name: shoppingcart-environment
           image: cloudcompdocker/shoppingcart-database:latest
           imagePullPolicy: Always
           ports:
