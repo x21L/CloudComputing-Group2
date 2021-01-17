@@ -50,6 +50,10 @@ public class DatabaseController {
         }
     }
 
+    public boolean validConnection() throws SQLException {
+        return connection.isValid(10);
+    }
+
     public void createTable() {
         try (Statement statement = connection.createStatement()) {
             statement.execute(String.format("CREATE SCHEMA IF NOT EXIST books" +
