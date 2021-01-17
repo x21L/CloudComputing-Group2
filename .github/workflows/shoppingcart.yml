@@ -30,7 +30,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build War File
-        run: mvn package
+        run: cd ./shopping-cart && mvn package && cd ..
       -
         name: Build and Push WebApi
         uses: docker/build-push-action@v2
