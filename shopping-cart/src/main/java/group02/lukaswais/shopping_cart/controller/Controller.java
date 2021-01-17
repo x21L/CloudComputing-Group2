@@ -2,7 +2,6 @@ package group02.lukaswais.shopping_cart.controller;
 
 import com.google.gson.Gson;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -34,17 +33,6 @@ public class Controller {
     public String test() throws ClassNotFoundException, SQLException {
         return new Gson().toJson("test from the controller " + databaseController.getConnection() + " " /*+ Class.forName("com.mysql.jdbc.Driver") +
                 " " + DriverManager.getConnection("jdbc:mysql://10.8.11.20:3306", "root", "password")*/ +
-                databaseController.validConnection());
-    }
-
-    public String getAllTables() throws SQLException {
-        StringBuilder sb = new StringBuilder();
-        ResultSet resultSet = databaseController.getAllTables();
-        while (resultSet.next()) {
-            sb.append(resultSet.getString(0));
-            sb.append(resultSet.getString(1));
-            sb.append(resultSet.getString(2));
-        }
-        return new Gson().toJson(sb.toString());
+                databaseController.validConnection() + " " + databaseController.getAllTables().getString(1));
     }
 }
