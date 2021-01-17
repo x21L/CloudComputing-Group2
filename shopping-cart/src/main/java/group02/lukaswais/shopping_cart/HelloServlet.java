@@ -27,9 +27,9 @@ public class HelloServlet extends HttpServlet {
             Connection conn = DriverManager.getConnection(url, "root", "password");
             Statement statement = conn.createStatement();
             // statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
+            statement.execute("CREATE DATABASE  IF NOT EXISTS  books;");
             statement.execute(
-                    "CREATE DATABASE  IF NOT EXISTS  books;" +
-                            " USE books;" +
+                    " USE books;" +
                             " CREATE TABLE IF NOT EXISTS shopping_cart ("
                             + "user_id VARCHAR(255) NOT NULL, "
                             + "IBAN VARCHAR(255) NOT NULL, "
