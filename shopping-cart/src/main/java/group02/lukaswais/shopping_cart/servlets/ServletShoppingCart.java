@@ -2,7 +2,6 @@ package group02.lukaswais.shopping_cart.servlets;
 
 import com.google.gson.Gson;
 import group02.lukaswais.shopping_cart.controller.Controller;
-import group02.lukaswais.shopping_cart.model.DBConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Servlet for the shopping cart.
@@ -22,10 +20,14 @@ import java.sql.Statement;
  */
 @WebServlet(name = "ServletShoppingCart", value = "/ShoppingCart")
 public class ServletShoppingCart extends HttpServlet {
-    private final Controller controller;
+    private Controller controller;
 
-    public ServletShoppingCart() throws ClassNotFoundException {
-        controller = new Controller();
+    public void init() {
+        try {
+            controller = new Controller();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -99,15 +101,7 @@ public class ServletShoppingCart extends HttpServlet {
     }
 
     private void insert(String user, String IBAN) {
-        // controller.insertToCart(user, IBAN);
-        try {
-            Statement statement = DBConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("USE books;");
-            statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('123ab', 'cd346');");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
+        controller.insertToCart(user, IBAN);
     }
 
     private void errorMessage(HttpServletResponse response, String message) {
