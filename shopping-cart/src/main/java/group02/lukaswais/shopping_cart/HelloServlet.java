@@ -37,12 +37,13 @@ public class HelloServlet extends HttpServlet {
                             + "IBAN VARCHAR(255) NOT NULL, "
                             + "PRIMARY KEY (user_id,IBAN))");
             statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('123ab', 'cd346');");
-            new Controller().insertToCart("user125", "ABC123");
-            statement.executeQuery("select * from shopping_cart");
+            Controller c = new Controller();
+            c.insertToCart("user125", "ABC123");
+            // statement.executeQuery("select * from shopping_cart");
             // Hello
             PrintWriter out = response.getWriter();
             out.println("<html><body>");
-            out.println("<h1>" + message + "</h1>");
+            out.println("<h1>" + c.getJsonItems() + "</h1>");
             out.println("</body></html>");
         } catch (Exception e) {
             PrintWriter out = response.getWriter();
