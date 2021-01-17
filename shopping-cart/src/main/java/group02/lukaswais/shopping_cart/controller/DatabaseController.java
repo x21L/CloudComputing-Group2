@@ -11,10 +11,15 @@ public class DatabaseController {
     // Database
     private final Connection connection;
 
+
     public DatabaseController() throws ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
         this.connection = DBConnection.getInstance().getConnection();
         createTable();
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 
     public ResultSet getAll() {
