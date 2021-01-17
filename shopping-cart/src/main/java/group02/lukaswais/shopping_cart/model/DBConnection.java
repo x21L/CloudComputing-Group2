@@ -10,15 +10,15 @@ import java.sql.SQLException;
  * @author Lukas Wais
  */
 public class DBConnection {
-    // not sure about the url...
-    private static final String DB_URL = "jdbc:mysql://shoppingcart-environment.mysql-shoppingcart:3306";
+    private static final String DB_URL = "jdbc:mysql://10.8.11.20:3306";
     private static DBConnection instance;
     private Connection connection;
 
-    public DBConnection() throws SQLException {
+    private DBConnection() throws SQLException {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             this.connection = DriverManager.getConnection(DB_URL, "root", "password");
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Could not connect to the database" + e.getMessage());
         }
     }

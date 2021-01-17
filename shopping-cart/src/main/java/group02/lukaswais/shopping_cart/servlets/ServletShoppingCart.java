@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
  * Servlet for the shopping cart.
@@ -69,12 +70,12 @@ public class ServletShoppingCart extends HttpServlet {
     }
 
     private void test(HttpServletResponse response) {
-        response.setContentType("text");
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println(controller.test());
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException | SQLException e) {
             errorMessage(response, e.getMessage());
         }
     }

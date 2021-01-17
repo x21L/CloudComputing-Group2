@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+### Microservice-Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##### Setting up using Kind
 
-## Available Scripts
+Delete cluster if already running
+```console
+kind delete cluster
+```
 
-In the project directory, you can run:
+Create cluster and mocked docker registry called localhost:5000 (Use Git Bash on Windows)
 
-### `npm start`
+```console
+./kind-local-registry.sh
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Apply namespace for the ``frontend-environment``
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```console
+kubectl apply -f namespace.yaml
+```
 
-### `npm test`
+Build the react frontend 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```console
+cd bookstore
+docker build -f Dockerfile -t localhost:5000/bookstore-frontend:1.0 .
+```
 
-### `npm run build`
+Push the created Frontend Docker image into the mocked docker registry called localhost:5000  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```console
+docker push localhost:5000/bookstore-frontend:1.0
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go back to the folder frontend-bookstore
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```console
+cd .. 
+```
 
-### `npm run eject`
+Apply the frontend deployment settings for the ``frontend-environment``
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```console
+kubectl apply -f deployment.yaml
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Apply the frontend service settings for the ``frontend-environment``
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```console
+kubectl apply -f service.yaml
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Check if everything is working
+```console
+kubectl get all --namespace frontend-environment
+```
 
-## Learn More
+```console
+NAME                                      READY   STATUS    RESTARTS   AGE
+pod/bookstore-frontend-657b577686-x422s   1/1     Running   0          14m
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+NAME                         TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)        AGE
+service/bookstore-frontend   LoadBalancer   10.8.10.8    34.121.83.50   80:30911/TCP   35h
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/bookstore-frontend   1/1     1            1           35h
 
-### Code Splitting
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/bookstore-frontend-657b577686   1         1         1       14m
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

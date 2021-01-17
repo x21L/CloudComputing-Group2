@@ -11,16 +11,20 @@ public class DatabaseController {
     // Database
     private final Connection connection;
 
+
     public DatabaseController() throws ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
         this.connection = DBConnection.getInstance().getConnection();
-        createTable();
+        // createTable();
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 
     public ResultSet getAll() {
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery("select * from mysql.shopping_cart");
+            return statement.executeQuery("select * from shopping_cart");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -30,9 +34,19 @@ public class DatabaseController {
     public ResultSet getUser(String userID) {
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery("select * from mysql.shopping_cart WHERE user_id = '" + userID + "'");
+            return statement.executeQuery("select * from shopping_cart WHERE user_id = '" + userID + "'");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ResultSet getAllTables() {
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery("select * from information_schema.tables");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return null;
     }
@@ -40,15 +54,20 @@ public class DatabaseController {
     public void insertNewItem(String userID, String IBAN) {
         try {
             Statement statement = connection.createStatement();
-            statement.executeQuery("insert into mysql.shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
+            statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private void createTable() {
+    public boolean validConnection() throws SQLException {
+        return connection.isValid(10);
+    }
+
+    public void createTable() {
         try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format("CREATE TABLE IF NO EXISTS %s ("
+            statement.execute(String.format(
+                    "CREATE TABLE IF NO EXISTS %s ("
                             + "%s VARCHAR(128) PRIMARY KEY, "
                             + "%s VARCHAR(128) PRIMARY KEY) ",
                     "shopping_cart", "user_id", "IBAN"));
