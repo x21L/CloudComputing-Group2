@@ -7,7 +7,7 @@ import Search from "./Search";
 
 
 const BOOK_API_URL = "http://35.193.104.75:8080/api";
-const SHOP_API_URL = "http://35.193.104.75:8080/api";
+const SHOP_API_URL = "http://35.239.83.61/shopping-cart-1.0/ShoppingCart";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -79,14 +79,16 @@ const App = () => {
 
   const buyBook = (id) => {
     console.log('BUY THE BOOK ID: ', id)
-    fetch(SHOP_API_URL + `?action=insert&user=1>&IBAN=${id}`)
-      .then(response => response.json())
+    fetch(SHOP_API_URL + `?action=insert&user=1&IBAN=${id}`)
+      .then(response => {
+        toggleShop()
+        return response.json()
+      })
       .catch(error => console.log(error));
   }
 
   const removeShopBook = (id) => {
-    console.log('REMOVE THE BOOK ID: ', id)
-    fetch(SHOP_API_URL + `?action=remove&user=1>&IBAN=${id}`)
+    fetch(SHOP_API_URL + `?action=delete&user=1&IBAN=${id}`)
       .then(response => response.json())
       .catch(error => console.log(error));
 
@@ -97,7 +99,7 @@ const App = () => {
     setShopLoading(true);
     setShopErrorMessage(null);
 
-    fetch(SHOP_API_URL + `/search?query=*`)
+    fetch(SHOP_API_URL + `?action=getAll`)
       .then(response => {
         if (response.status === 204) { /* NO CONTENT */
           setShopErrorMessage("NO CONTENT CAN BE FOUND!");
@@ -150,8 +152,9 @@ const App = () => {
           ) : (
             shopBooks.map((shopBook, index) => (
               books.map((book, b_index) => {
-                if (shopBook.id === book.id)
-                  return <ShopBook key={`${index}-${shopBook.Title}`} shopBook={book} remove={removeShopBook}/>
+                console.log('Comp IDs: ', shopBook.id, book.id)
+                if (shopBook.book === book.id)
+                  return <ShopBook key={`${index}-${shopBook.book}`} shopBook={book} remove={removeShopBook}/>
                 else return null
               })
             ))
