@@ -54,6 +54,16 @@ public class DatabaseController {
         }
     }
 
+    public void deleteFromCart(String userID, String IBAN) {
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("USE books;");
+            statement.execute("delete from shopping_cart where user_id = '" + userID + "' and IBAN = '" + IBAN + "';");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public boolean validConnection() throws SQLException {
         return connection.isValid(10);
     }
