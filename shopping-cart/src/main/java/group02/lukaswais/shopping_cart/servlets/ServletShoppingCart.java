@@ -46,10 +46,10 @@ public class ServletShoppingCart extends HttpServlet {
                 getAll(response);
                 break;
             case "insert":
-                insert(request.getParameter("user"), request.getParameter("IBAN"));
+                insert(response, request.getParameter("user"), request.getParameter("IBAN"));
                 break;
             case "delete":
-                delete(request.getParameter("user"), request.getParameter("IBAN"));
+                delete(response, request.getParameter("user"), request.getParameter("IBAN"));
                 break;
             case "getUser":
                 getBooksFromUser(response, request.getParameter("user"));
@@ -101,12 +101,26 @@ public class ServletShoppingCart extends HttpServlet {
         }
     }
 
-    private void delete(String user, String IBAN) {
+    private void delete(HttpServletResponse response, String user, String IBAN) {
         controller.deleteFromCart(user, IBAN);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println(new Gson().toJson("deleted user " + user));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void insert(String user, String IBAN) {
+    private void insert(HttpServletResponse response, String user, String IBAN) {
         controller.insertToCart(user, IBAN);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println(new Gson().toJson("inserted user " + user));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void errorMessage(HttpServletResponse response, String message) {
