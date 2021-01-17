@@ -26,7 +26,8 @@ public class HelloServlet extends HttpServlet {
             String url = "jdbc:mysql://10.8.11.20:3306";
             Connection conn = DriverManager.getConnection(url, "root", "password");
             Statement statement = conn.createStatement();
-            statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
+            // statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
+            statement.executeQuery("select * from information_schema.tables");
             // Hello
             PrintWriter out = response.getWriter();
             out.println("<html><body>");
