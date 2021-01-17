@@ -24,14 +24,20 @@ public class DBConnection {
     }
 
     public static DBConnection getInstance() {
-        if (instance == null) {
-            try {
-                instance = new DBConnection();
-            } catch (SQLException throwables) {
-                System.out.println("Can not establish database connection \n" + throwables.getMessage());
-            }
+//        if (instance == null) {
+//            try {
+//                instance = new DBConnection();
+//            } catch (SQLException throwables) {
+//                System.out.println("Can not establish database connection \n" + throwables.getMessage());
+//            }
+//        }
+//        return instance;
+        try {
+            return new DBConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return instance;
+        return null;
     }
 
     public Connection getConnection() {
