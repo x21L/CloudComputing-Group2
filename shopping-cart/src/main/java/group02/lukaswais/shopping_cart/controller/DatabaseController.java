@@ -68,8 +68,8 @@ public class DatabaseController {
         try (Statement statement = connection.createStatement()) {
             statement.execute(String.format(
                     "CREATE TABLE IF NOT EXISTS shopping_cart  %s ("
-                            + "%s VARCHAR(128) PRIMARY KEY, "
-                            + "%s VARCHAR(128) PRIMARY KEY) ",
+                            + "%s VARCHAR(128) PRIMARY KEY NOT NULL, "
+                            + "%s VARCHAR(128) PRIMARY KEY NOT NULL) ",
                     "shopping_cart", "user_id", "IBAN"));
         } catch (SQLException throwables) {
             System.out.println("Could not create table \n" + throwables.getMessage());
