@@ -14,7 +14,7 @@ public class DatabaseController {
 
     public DatabaseController() throws ClassNotFoundException {
         this.connection = DBConnection.getInstance().getConnection();
-        // createTable();
+        createTable();
     }
 
     public Connection getConnection() {
