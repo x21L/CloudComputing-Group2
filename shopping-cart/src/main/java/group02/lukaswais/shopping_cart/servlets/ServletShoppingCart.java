@@ -76,6 +76,8 @@ public class ServletShoppingCart extends HttpServlet {
             writer.println(controller.test());
         } catch (IOException e) {
             errorMessage(response, e.getMessage());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
