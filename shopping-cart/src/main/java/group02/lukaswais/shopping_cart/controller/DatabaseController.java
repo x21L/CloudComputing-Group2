@@ -67,7 +67,7 @@ public class DatabaseController {
     public void createTable() {
         try (Statement statement = connection.createStatement()) {
             statement.execute(String.format(
-                    "CREATE TABLE IF NO EXISTS %s ("
+                    "CREATE TABLE IF NOT EXISTS shopping_cart  %s ("
                             + "%s VARCHAR(128) PRIMARY KEY, "
                             + "%s VARCHAR(128) PRIMARY KEY) ",
                     "shopping_cart", "user_id", "IBAN"));
