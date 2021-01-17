@@ -57,10 +57,10 @@ public class DatabaseController {
 
     public void createTable() {
         try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS books;");
+            statement.executeUpdate("USE books;");
             statement.execute(
-                    "CREATE DATABASE  IF NOT EXISTS  books;" +
-                            " USE books;" +
-                            " CREATE TABLE IF NOT EXISTS shoppingcart ("
+                    " CREATE TABLE IF NOT EXISTS shopping_cart ("
                             + "user_id VARCHAR(255) NOT NULL, "
                             + "IBAN VARCHAR(255) NOT NULL, "
                             + "PRIMARY KEY (user_id,IBAN))");
