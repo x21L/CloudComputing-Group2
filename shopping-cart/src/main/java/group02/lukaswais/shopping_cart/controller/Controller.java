@@ -1,8 +1,12 @@
 package group02.lukaswais.shopping_cart.controller;
 
 import com.google.gson.Gson;
+import group02.lukaswais.shopping_cart.model.Item;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This list fills the list with books and executes the SQL queries.
@@ -18,8 +22,17 @@ public class Controller {
         databaseController.createTable();
     }
 
-    public String getJsonItems() {
-        return databaseController.getAll().toString();
+    public String getJsonItems() throws SQLException {
+        List<Item> items = new ArrayList<>();
+        ResultSet resultSet = databaseController.getAll();
+        while (resultSet.next()) {
+            final Item item = new Item(
+                    resultSet.getString("userID"),
+                    resultSet.getString("IBAN")
+            );
+            items.add(item);
+        }
+        return new Gson().toJson(items);
     }
 
     public void insertToCart(String user, String IBAN) {

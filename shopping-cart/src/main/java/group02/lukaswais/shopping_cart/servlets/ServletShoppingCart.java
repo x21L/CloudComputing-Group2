@@ -68,7 +68,7 @@ public class ServletShoppingCart extends HttpServlet {
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println(controller.getJsonItems());
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             errorMessage(response, e.getMessage());
         }
     }
