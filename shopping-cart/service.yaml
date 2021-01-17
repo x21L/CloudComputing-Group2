@@ -25,4 +25,5 @@ spec:
       targetPort: 3306
   selector:
     app: mysql-shoppingcart
+  clusterIP: 10.8.11.20
   type: ClusterIP
