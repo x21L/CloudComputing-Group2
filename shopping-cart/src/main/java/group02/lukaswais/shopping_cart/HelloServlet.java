@@ -37,6 +37,7 @@ public class HelloServlet extends HttpServlet {
                             + "IBAN VARCHAR(255) NOT NULL, "
                             + "PRIMARY KEY (user_id,IBAN))");
             statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('123ab', 'cd346');");
+            statement.executeQuery("select * from shopping_cart");
             // Hello
             PrintWriter out = response.getWriter();
             out.println("<html><body>");
