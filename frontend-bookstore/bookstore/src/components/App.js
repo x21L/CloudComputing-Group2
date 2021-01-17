@@ -152,7 +152,6 @@ const App = () => {
           ) : (
             shopBooks.map((shopBook, index) => (
               books.map((book, b_index) => {
-                console.log('Comp IDs: ', shopBook.id, book.id)
                 if (shopBook.book === book.id)
                   return <ShopBook key={`${index}-${shopBook.book}`} shopBook={book} remove={removeShopBook}/>
                 else return null
