@@ -20,7 +20,9 @@ public class HelloServlet extends HttpServlet {
         response.setContentType("text/html");
 
         try {
-            String url = "jdbc:mysql://10.8.11.20:3306";
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String url = "jdbc:mysql://shoppingcart-environment.mysql-shoppingcart:3306";
             DriverManager.getConnection(url, "root", "password");
 
             // Hello
