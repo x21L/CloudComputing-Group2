@@ -29,8 +29,8 @@ public class HelloServlet extends HttpServlet {
             // statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
             statement.execute(String.format(
                     "CREATE TABLE IF NOT EXISTS shopping_cart  %s ("
-                            + "%s VARCHAR(128) PRIMARY KEY, "
-                            + "%s VARCHAR(128) PRIMARY KEY) ",
+                            + "%s VARCHAR(128) PRIMARY KEY NOT NULL, "
+                            + "%s VARCHAR(128) PRIMARY KEY NOT NULL) ",
                     "shopping_cart", "user_id", "IBAN"));
             // Hello
             PrintWriter out = response.getWriter();
