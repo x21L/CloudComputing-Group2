@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class ServletShoppingCart extends HttpServlet {
     private final Controller controller;
 
-    public ServletShoppingCart() throws ClassNotFoundException {
+    public ServletShoppingCart() throws Exception {
         controller = new Controller();
     }
 

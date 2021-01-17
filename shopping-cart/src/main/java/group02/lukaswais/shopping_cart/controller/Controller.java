@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class Controller {
     private final DatabaseController databaseController;
 
-    public Controller() throws ClassNotFoundException {
+    public Controller() throws Exception {
         databaseController = new DatabaseController();
     }
 
