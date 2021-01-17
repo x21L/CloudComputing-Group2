@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class ServletShoppingCart extends HttpServlet {
     private final Controller controller;
 
-    public ServletShoppingCart() throws Exception {
+    public ServletShoppingCart() throws ClassNotFoundException {
         controller = new Controller();
     }
 
@@ -75,10 +75,8 @@ public class ServletShoppingCart extends HttpServlet {
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println(controller.test());
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException | SQLException e) {
             errorMessage(response, e.getMessage());
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
         }
     }
 
