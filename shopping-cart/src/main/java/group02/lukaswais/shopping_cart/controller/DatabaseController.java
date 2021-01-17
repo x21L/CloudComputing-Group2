@@ -41,6 +41,16 @@ public class DatabaseController {
         return null;
     }
 
+    public ResultSet getAllTables() {
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery("select * from information_schema.tables");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public void insertNewItem(String userID, String IBAN) {
         try {
             Statement statement = connection.createStatement();
