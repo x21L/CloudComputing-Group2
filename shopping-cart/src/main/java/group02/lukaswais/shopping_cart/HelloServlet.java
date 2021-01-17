@@ -27,7 +27,11 @@ public class HelloServlet extends HttpServlet {
             Connection conn = DriverManager.getConnection(url, "root", "password");
             Statement statement = conn.createStatement();
             // statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
-            statement.executeQuery("select * from information_schema.tables");
+            statement.execute(String.format(
+                    "CREATE TABLE IF NOT EXISTS shopping_cart  %s ("
+                            + "%s VARCHAR(128) PRIMARY KEY, "
+                            + "%s VARCHAR(128) PRIMARY KEY) ",
+                    "shopping_cart", "user_id", "IBAN"));
             // Hello
             PrintWriter out = response.getWriter();
             out.println("<html><body>");
