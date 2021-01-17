@@ -27,7 +27,7 @@ public class Controller {
         return new Gson().toJson(databaseController.getUser(userID));
     }
 
-    public String test() {
-        return new Gson().toJson("test from the controller " + databaseController.getConnection());
+    public String test() throws ClassNotFoundException {
+        return new Gson().toJson("test from the controller " + databaseController.getConnection() + " " + Class.forName("com.mysql.jdbc.Driver"));
     }
 }
