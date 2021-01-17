@@ -51,6 +51,9 @@ public class ServletShoppingCart extends HttpServlet {
             case "test":
                 test(response);
                 break;
+            case "getAllTables":
+                getAllTables(response);
+                break;
             default:
                 errorMessage(response, action + " is not a valid parameter");
         }
@@ -98,6 +101,17 @@ public class ServletShoppingCart extends HttpServlet {
 
     private void insert(String user, String IBAN) {
         controller.insertToCart(user, IBAN);
+    }
+
+    private void getAllTables(HttpServletResponse response) {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println(controller.getAllTables());
+        } catch (IOException e) {
+            errorMessage(response, e.getMessage());
+        }
     }
 
     private void errorMessage(HttpServletResponse response, String message) {
