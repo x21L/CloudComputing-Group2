@@ -1,7 +1,5 @@
 package group02.lukaswais.shopping_cart.model;
 
-import java.util.List;
-
 /**
  * This class represents a List of items/books with the corresponding user in the shopping cart.
  * It is loaded from the database.
@@ -10,26 +8,26 @@ import java.util.List;
  */
 public class Item {
     private final String user;
-    private final List<String> books;
+    private final String book;
 
-    public Item(String user, List<String> books) {
+    public Item(String user, String book) {
         this.user = user;
-        this.books = books;
+        this.book = book;
     }
 
     public String getUser() {
         return user;
     }
 
-    public List<String> getBooks() {
-        return books;
+    public String getBooks() {
+        return book;
     }
 
     @Override
     public String toString() {
         return "Item{" +
                 "user='" + user + '\'' +
-                ", books=" + books +
+                ", books=" + book +
                 '}';
     }
 }
