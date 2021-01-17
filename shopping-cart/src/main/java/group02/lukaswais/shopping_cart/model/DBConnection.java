@@ -15,10 +15,11 @@ public class DBConnection {
     private static DBConnection instance;
     private Connection connection;
 
-    public DBConnection() throws SQLException {
+    private DBConnection() throws SQLException {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             this.connection = DriverManager.getConnection(DB_URL, "root", "password");
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Could not connect to the database" + e.getMessage());
         }
     }
