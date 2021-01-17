@@ -15,6 +15,7 @@ public class Controller {
 
     public Controller() throws ClassNotFoundException {
         databaseController = new DatabaseController();
+        databaseController.createTable();
     }
 
     public String getJsonItems() {

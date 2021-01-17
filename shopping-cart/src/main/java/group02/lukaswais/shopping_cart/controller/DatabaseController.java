@@ -50,7 +50,7 @@ public class DatabaseController {
         }
     }
 
-    private void createTable() {
+    public void createTable() {
         try (Statement statement = connection.createStatement()) {
             statement.execute(String.format("CREATE SCHEMA IF NOT EXIST books" +
                             "USE books" +
