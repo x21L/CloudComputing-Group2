@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
  * Servlet for the shopping cart.
@@ -76,7 +77,7 @@ public class ServletShoppingCart extends HttpServlet {
             writer.println(controller.test());
         } catch (IOException e) {
             errorMessage(response, e.getMessage());
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
