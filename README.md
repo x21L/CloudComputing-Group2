@@ -55,12 +55,12 @@ CMD ["npm", "start"]
 
 For the frontend microservice a Deployment and a Service are created.
 
-The Deployment takes care that the image is always available. We use 'replicas: 1' to save resources since all microservices are running in the same cluste and a update strategy of RollingUpdate so that the webpage is reachable during the update.
+The Deployment takes care that the image is always available. We use 'replicas: 2' and 'type: RollingUpdate' to have at least one available pod at each time when doing a rollup update.
 
 ```console
 ...
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: bookstore-frontend
