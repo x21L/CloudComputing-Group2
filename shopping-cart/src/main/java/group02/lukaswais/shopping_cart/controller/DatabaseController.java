@@ -45,7 +45,8 @@ public class DatabaseController {
     public void insertNewItem(String userID, String IBAN) {
         try {
             Statement statement = connection.createStatement();
-            statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
+            // statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
+            statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('123ab', 'cd346');");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
