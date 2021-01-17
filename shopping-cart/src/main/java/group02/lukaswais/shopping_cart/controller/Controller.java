@@ -39,6 +39,10 @@ public class Controller {
         databaseController.insertNewItem(user, IBAN);
     }
 
+    public void deleteFromCart(String user, String IBAN) {
+        databaseController.deleteFromCart(user, IBAN);
+    }
+
     public String getJsonBooksFromUser(String userID) throws SQLException {
         List<String> books = new ArrayList<>();
         ResultSet resultSet = databaseController.getAll();

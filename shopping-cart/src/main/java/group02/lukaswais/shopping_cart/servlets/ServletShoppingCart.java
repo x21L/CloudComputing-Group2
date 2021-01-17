@@ -45,13 +45,13 @@ public class ServletShoppingCart extends HttpServlet {
                 getAll(response);
                 break;
             case "insert":
-                String user = request.getParameter("user");
-                String IBAN = request.getParameter("IBAN");
-                insert(user, IBAN);
+                insert(request.getParameter("user"), request.getParameter("IBAN"));
+                break;
+            case "delete":
+                delete(request.getParameter("user"), request.getParameter("IBAN"));
                 break;
             case "getUser":
-                user = request.getParameter("user");
-                getBooksFromUser(response, user);
+                getBooksFromUser(response, request.getParameter("user"));
             case "test":
                 test(response);
                 break;
@@ -100,8 +100,12 @@ public class ServletShoppingCart extends HttpServlet {
         }
     }
 
-    private void insert(String user, String IBAN) {
+    private void delete(String user, String IBAN) {
         controller.insertToCart(user, IBAN);
+    }
+
+    private void insert(String user, String IBAN) {
+        controller.deleteFromCart(user, IBAN);
     }
 
     private void errorMessage(HttpServletResponse response, String message) {
