@@ -31,6 +31,7 @@ public class Controller {
     }
 
     public String test() throws ClassNotFoundException, SQLException {
+        databaseController.insertNewItem("abc", "uauauau");
         return new Gson().toJson("test from the controller " + databaseController.getConnection() + " " /*+ Class.forName("com.mysql.jdbc.Driver") +
                 " " + DriverManager.getConnection("jdbc:mysql://10.8.11.20:3306", "root", "password")*/ +
                 databaseController.validConnection());
