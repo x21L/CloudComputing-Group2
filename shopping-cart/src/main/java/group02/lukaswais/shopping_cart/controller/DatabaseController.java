@@ -24,7 +24,7 @@ public class DatabaseController {
     public ResultSet getAll() {
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery("select * from shopping_cart");
+            return statement.executeQuery("select * from shoppingcart");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -34,27 +34,18 @@ public class DatabaseController {
     public ResultSet getUser(String userID) {
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery("select * from shopping_cart WHERE user_id = '" + userID + "'");
+            return statement.executeQuery("select * from shoppingcart WHERE user_id = '" + userID + "'");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
-    public ResultSet getAllTables() {
-        try {
-            Statement statement = connection.createStatement();
-            return statement.executeQuery("select * from information_schema.tables");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
 
     public void insertNewItem(String userID, String IBAN) {
         try {
             Statement statement = connection.createStatement();
-            statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
+            statement.executeQuery("insert into shoppingcart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -66,11 +57,13 @@ public class DatabaseController {
 
     public void createTable() {
         try (Statement statement = connection.createStatement()) {
-            statement.execute(String.format(
-                    "CREATE TABLE IF NOT EXISTS shopping_cart  %s ("
-                            + "%s VARCHAR(128) PRIMARY KEY NOT NULL, "
-                            + "%s VARCHAR(128) PRIMARY KEY NOT NULL) ",
-                    "shopping_cart", "user_id", "IBAN"));
+            statement.execute(
+                    "CREATE DATABASE  IF NOT EXISTS  books;" +
+                            " USE books;" +
+                            " CREATE TABLE IF NOT EXISTS shoppingcart ("
+                            + "user_id VARCHAR(255) NOT NULL, "
+                            + "IBAN VARCHAR(255) NOT NULL, "
+                            + "PRIMARY KEY (user_id,IBAN))");
         } catch (SQLException throwables) {
             System.out.println("Could not create table \n" + throwables.getMessage());
         }
