@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
@@ -22,8 +24,9 @@ public class HelloServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://10.8.11.20:3306";
-            DriverManager.getConnection(url, "root", "password");
-
+            Connection conn = DriverManager.getConnection(url, "root", "password");
+            Statement statement = conn.createStatement();
+            statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
             // Hello
             PrintWriter out = response.getWriter();
             out.println("<html><body>");
