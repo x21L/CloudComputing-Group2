@@ -39,8 +39,13 @@ public class Controller {
         databaseController.insertNewItem(user, IBAN);
     }
 
-    public String getJsonBooksFromUser(String userID) {
-        return new Gson().toJson(databaseController.getUser(userID));
+    public String getJsonBooksFromUser(String userID) throws SQLException {
+        List<String> books = new ArrayList<>();
+        ResultSet resultSet = databaseController.getAll();
+        while (resultSet.next()) {
+            books.add(resultSet.getString("IBAN"));
+        }
+        return new Gson().toJson(books);
     }
 
     public String test() throws ClassNotFoundException, SQLException {

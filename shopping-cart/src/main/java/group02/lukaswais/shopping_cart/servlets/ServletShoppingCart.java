@@ -95,7 +95,7 @@ public class ServletShoppingCart extends HttpServlet {
             } else {
                 writer.println(json);
             }
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             errorMessage(response, e.getMessage());
         }
     }
