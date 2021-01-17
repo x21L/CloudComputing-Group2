@@ -37,8 +37,9 @@ public class ServletShoppingCart extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
+        response.addHeader("Access-Control-Allow-Origin", "*");
 
         switch (action) {
             case "getAll":
@@ -65,7 +66,6 @@ public class ServletShoppingCart extends HttpServlet {
     private void getAll(HttpServletResponse response) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println(controller.getJsonItems());
@@ -77,7 +77,6 @@ public class ServletShoppingCart extends HttpServlet {
     private void test(HttpServletResponse response) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println(controller.test());
@@ -89,7 +88,6 @@ public class ServletShoppingCart extends HttpServlet {
     private void getBooksFromUser(HttpServletResponse response, String user) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         try (PrintWriter writer = response.getWriter()) {
             String json = controller.getJsonBooksFromUser(user);
@@ -114,7 +112,6 @@ public class ServletShoppingCart extends HttpServlet {
     private void errorMessage(HttpServletResponse response, String message) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.addHeader("Access-Control-Allow-Origin", "*");
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println(new Gson().toJson(message));
