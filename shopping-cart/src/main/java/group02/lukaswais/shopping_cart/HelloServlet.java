@@ -22,7 +22,7 @@ public class HelloServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String url = "jjdbc:mysql://10.8.11.20:3306";
+            String url = "jdbc:mysql://10.8.11.20:3306";
             DriverManager.getConnection(url, "root", "password");
 
             // Hello
