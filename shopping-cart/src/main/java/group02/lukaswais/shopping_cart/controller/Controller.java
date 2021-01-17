@@ -28,6 +28,6 @@ public class Controller {
     }
 
     public String test() {
-        return new Gson().toJson("test from the controller \n" + databaseController);
+        return new Gson().toJson("test from the controller");
     }
 }
