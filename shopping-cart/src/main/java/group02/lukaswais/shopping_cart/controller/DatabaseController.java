@@ -12,7 +12,7 @@ public class DatabaseController {
     private final Connection connection;
 
 
-    public DatabaseController() throws ClassNotFoundException {
+    public DatabaseController() {
         this.connection = DBConnection.getInstance().getConnection();
         createTable();
     }
@@ -25,7 +25,7 @@ public class DatabaseController {
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("USE books;");
-            return statement.executeQuery("select * from shopping_cart");
+            return statement.executeQuery("select * from shopping_cart;");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -36,7 +36,7 @@ public class DatabaseController {
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("USE books;");
-            return statement.executeQuery("select * from shopping_cart WHERE user_id = '" + userID + "'");
+            return statement.executeQuery("select * from shopping_cart WHERE user_id = '" + userID + "';");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -48,7 +48,8 @@ public class DatabaseController {
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("USE books;");
-            statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
+            statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('123ab', 'cd346');");
+            //  statement.execute("insert into shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
