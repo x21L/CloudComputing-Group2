@@ -101,11 +101,11 @@ public class ServletShoppingCart extends HttpServlet {
     }
 
     private void delete(String user, String IBAN) {
-        controller.insertToCart(user, IBAN);
+        controller.deleteFromCart(user, IBAN);
     }
 
     private void insert(String user, String IBAN) {
-        controller.deleteFromCart(user, IBAN);
+        controller.insertToCart(user, IBAN);
     }
 
     private void errorMessage(HttpServletResponse response, String message) {
