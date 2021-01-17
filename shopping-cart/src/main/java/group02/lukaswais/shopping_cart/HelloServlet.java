@@ -23,7 +23,7 @@ public class HelloServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://10.8.11.20:3306";
+            String url = "jdbc:mysql://10.8.11.20:3306/books";
             Connection conn = DriverManager.getConnection(url, "root", "password");
             Statement statement = conn.createStatement();
             // statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
