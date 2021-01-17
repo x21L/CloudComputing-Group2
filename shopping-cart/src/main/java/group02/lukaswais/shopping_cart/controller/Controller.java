@@ -19,7 +19,7 @@ public class Controller {
     }
 
     public String getJsonItems() {
-        return new Gson().toJson(databaseController.getAll());
+        return databaseController.getAll().toString();
     }
 
     public void insertToCart(String user, String IBAN) {
