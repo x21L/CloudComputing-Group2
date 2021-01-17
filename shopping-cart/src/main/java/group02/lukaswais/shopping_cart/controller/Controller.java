@@ -27,7 +27,7 @@ public class Controller {
         ResultSet resultSet = databaseController.getAll();
         while (resultSet.next()) {
             final Item item = new Item(
-                    resultSet.getString("userID"),
+                    resultSet.getString("user_id"),
                     resultSet.getString("IBAN")
             );
             items.add(item);
