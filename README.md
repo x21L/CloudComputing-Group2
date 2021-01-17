@@ -30,7 +30,7 @@ The Microservices are created in different programming languages:
 The frontend is implemented in React.
 This minimalized implementation of a web-shop-page contains a search-field a book list and a shopping cart. Books can be added to the shopping cart by pressing a button. The shopping cart contains a list of books that have been added and a remove button.
 
-![alt tag](frontend.png)
+![alt tag](frontend-pic.png)
 
 ### Docker image
 
