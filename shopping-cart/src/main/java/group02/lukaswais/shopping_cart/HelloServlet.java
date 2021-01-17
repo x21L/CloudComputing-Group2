@@ -31,7 +31,7 @@ public class HelloServlet extends HttpServlet {
                     " USE books;" +
                             " CREATE TABLE IF NOT EXISTS shopping_cart ("
                             + "user_id VARCHAR(255) NOT NULL, "
-                            + "IBAN VARCHAR(255) NOT NULL, "
+                            + "iban VARCHAR(255) NOT NULL, "
                             + "PRIMARY KEY (user_id,IBAN))");
             // Hello
             PrintWriter out = response.getWriter();
