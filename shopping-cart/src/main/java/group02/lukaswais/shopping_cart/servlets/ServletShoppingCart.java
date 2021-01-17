@@ -69,7 +69,7 @@ public class ServletShoppingCart extends HttpServlet {
     }
 
     private void test(HttpServletResponse response) {
-        response.setContentType("text");
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         try (PrintWriter writer = response.getWriter()) {
