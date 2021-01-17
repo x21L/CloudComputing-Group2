@@ -24,7 +24,7 @@ public class DatabaseController {
     public ResultSet getAll() {
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery("select * from shopping_cart");
+            return statement.executeQuery("select * from books.shopping_cart");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -34,7 +34,7 @@ public class DatabaseController {
     public ResultSet getUser(String userID) {
         try {
             Statement statement = connection.createStatement();
-            return statement.executeQuery("select * from shopping_cart WHERE user_id = '" + userID + "'");
+            return statement.executeQuery("select * from books.shopping_cart WHERE user_id = '" + userID + "'");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -44,7 +44,7 @@ public class DatabaseController {
     public void insertNewItem(String userID, String IBAN) {
         try {
             Statement statement = connection.createStatement();
-            statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
+            statement.executeQuery("insert into books.shopping_cart (user_id, IBAN) VALUES ('" + userID + "', '" + IBAN + "');");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
