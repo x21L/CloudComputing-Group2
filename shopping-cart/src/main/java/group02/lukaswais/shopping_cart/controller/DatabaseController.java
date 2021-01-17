@@ -12,9 +12,9 @@ public class DatabaseController {
     private final Connection connection;
 
 
-    public DatabaseController() throws ClassNotFoundException {
+    public DatabaseController() throws Exception {
         this.connection = DBConnection.getInstance().getConnection();
-       // createTable();
+        createTable();
     }
 
     public Connection getConnection() {
@@ -50,7 +50,7 @@ public class DatabaseController {
         }
     }
 
-    private void createTable() {
+    private void createTable() throws Exception {
         try (Statement statement = connection.createStatement()) {
             statement.execute(String.format("CREATE SCHEMA IF NOT EXIST books" +
                             "USE books" +
@@ -60,6 +60,8 @@ public class DatabaseController {
                     "shopping_cart", "user_id", "IBAN"));
         } catch (SQLException throwables) {
             System.out.println("Could not create table \n" + throwables.getMessage());
+        } catch (NullPointerException e) {
+            throw new Exception("connection is null the connection is valid " + connection.isValid(10));
         }
     }
 }
