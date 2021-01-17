@@ -28,7 +28,9 @@ public class HelloServlet extends HttpServlet {
             Statement statement = conn.createStatement();
             // statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
             statement.execute(
-                    "CREATE TABLE IF NOT EXISTS shopping_cart ("
+                    "CREATE DATABASE  IF NOT EXISTS  books;" +
+                            " USE books;" +
+                            " CREATE TABLE IF NOT EXISTS shopping_cart ("
                             + "user_id VARCHAR(128) PRIMARY KEY NOT NULL, "
                             + "IBAN VARCHAR(128) PRIMARY KEY NOT NULL, "
                             + "PRIMARY KEY (user_id,IBAN))");
