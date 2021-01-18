@@ -24,11 +24,13 @@ public class HelloServlet extends HttpServlet {
         response.setContentType("text/html");
 
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://10.8.11.20:3306";
             Connection conn = DriverManager.getConnection(url, "root", "password");
             Statement statement = conn.createStatement();
             // statement.executeQuery("insert into shopping_cart (user_id, IBAN) VALUES ('abc123', 'def456');");
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS books;");
+            statement.executeUpdate("USE books;");
             statement.execute(
                     /*"CREATE DATABASE  IF NOT EXISTS  books;" +
                             " USE books;" +*/
