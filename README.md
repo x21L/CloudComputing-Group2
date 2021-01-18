@@ -9,7 +9,7 @@
 
 ## Overview
 
-The bookstore is spliited up into 3 Microservices:
+The bookstore is splited up into 3 Microservices:
 * Frontend
 * Book Search
 * Shopping Cart
