@@ -202,3 +202,143 @@ At the and we start the rollout.
 ## Microservice Search
 
 ## Microservice Shopping Cart
+
+The microservice shopping cart consists of two major components.
+
+* An Apache Tomcat
+* A MySQL Database
+
+![shopping-cart diagramm](/shopping-cart/img/shoppingcart.png)
+
+Each of them is one pod in kubernetes, and they are in the same namespace. The Tomcat is the RestFul API and the MySQL
+holds the actual data for the shopping cart.
+
+### Docker image
+
+#### Apache Tomcat
+
+~~~shell
+FROM tomcat
+
+COPY target/shopping-cart-1.0.war /usr/local/tomcat/webapps/
+COPY mysql-connector-java-8.0.22.jar /usr/local/tomcat
+CMD ["catalina.sh", "run"]
+~~~
+
+Very important are the two copy statements. The first one copies the generated `War` file from the build to the
+`webapps` directory. It makes your programed service availabele und `http://<server-ip>/name-version`. The name and the
+version are specified in the `pom.xml` file.
+
+The second copy statement copies the mysql connector to the `CATALINA_HOME` directory. The docker equievalent to this is
+`/usr/local/tomcat`.
+
+#### MySQL
+
+~~~shell
+FROM mysql
+
+ENV MYSQL_ROOT_PASSWORD=password
+~~~
+
+This is a very simple Dockerfile. It just gets the MySQL image and sets the root password to password. This is of
+course **not** recommended for production.
+
+## Google Cloud
+
+For the shopping cart microservice a Deployment and a Service are also created, like the frontend microservice.
+
+In addition to the frontend we use `replicas: 1` and we also use the `RollingUpdate` strategy.
+
+~~~shell 
+...
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat-shoppingcart
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+...
+~~~
+
+We also want to pull the latest image from `cloudcompdocker/shoppingcart-webapi`. This image should be pulled even if
+docker-tag not changed with `imagePullPolicy: Always`. Moreover, the port is set to 8080.
+
+~~~shell
+...
+containers:
+        - name: shoppingcart-environment
+          image: cloudcompdocker/shoppingcart-webapi:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+...
+~~~
+
+The deployment for the mysql looks very similar we also use 1 replica, but the app is called mysql-shoppingcart. You can
+spot differences in the container section. For the database we use the port 3306.
+
+~~~shell
+...
+metadata:
+  namespace: shoppingcart-environment
+  name: mysql-shoppingcart
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+...
+~~~
+
+As an attentive reader you will have noticed that both pods are in the same namespace called `shoppingcart-environment`.
+The Tomcat server should be available from outside, thus we use a load balancer, and a fixed access point.
+
+~~~shell
+ ...
+  selector:
+    app: tomcat-shoppingcart
+  type: LoadBalancer
+...
+~~~
+
+The database is not public available, for this we are using a static cluster ip address.
+
+~~~shell
+...
+  selector:
+    app: mysql-shoppingcart
+  clusterIP: 10.8.11.20
+  type: ClusterIP
+~~~
+
+### GitHub Actions
+
+In general, this works exactly like the frontend microservice. It gets triggerd by a push to `shopping-cart` directory.
+
+~~~shell
+on:
+  workflow_dispatch:
+  push:
+    paths:
+     - 'shopping-cart/**'
+...
+~~~
+
+One major difference is there to point out. As job we can automatically build the War file with Apache Maven.
+
+~~~shell
+...
+- name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build War File
+        run: cd ./shopping-cart && mvn package && cd ..
+...
+~~~
+
+After the build succeeds the webservice is available under   
+`http://35.239.83.61/shopping-cart-1.0/ShoppingCart?action=<parameter>`
