@@ -1,0 +1,53 @@
+name: frontend_CICD
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+    - 'frontend-bookstore/**'
+
+jobs:
+  path-context:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PWD }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend-bookstore/bookstore
+          push: true
+          tags: cloudcompdocker/bookstore-frontend:latest
+      - 
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          version: '290.0.1'
+          service_account_key: ${{ secrets.GK_KEY }}
+          project_id: ${{ secrets.GK_PROJECT_ID }}
+      - 
+        run: |-
+          gcloud container clusters get-credentials "cluster-1" --zone "us-central1-c"
+      - 
+        name: Update Deployment and Services
+        run: |-
+          kubectl apply -f ./frontend-bookstore/namespace.yaml
+          kubectl apply -f ./frontend-bookstore/deployment.yaml
+          kubectl apply -f ./frontend-bookstore/service.yaml
+      - 
+        name: Deploy
+        run: |-
+          kubectl rollout restart -f ./frontend-bookstore/deployment.yaml --namespace frontend-environment

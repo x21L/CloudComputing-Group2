@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: search-environment
+  name: search-webapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search-webapi
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: search-webapi
+    spec:
+      containers:
+        - name: search-webapi
+          image: cloudcompdocker/search-webapi:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80

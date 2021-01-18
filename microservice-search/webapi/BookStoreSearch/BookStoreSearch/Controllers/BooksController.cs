@@ -1,8 +1,10 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using BookStoreSearch.Contract;
 using BookStoreSearch.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace BookStoreSearch.Controllers
 {
@@ -33,6 +35,36 @@ namespace BookStoreSearch.Controllers
             }
 
             return Ok(item);
+        }
+
+        /// <summary>
+        /// Imports new books to the storage.
+        /// </summary>
+        /// <returns>200 with book data payload.</returns>
+        [HttpPost]
+        [Route("/import")]
+        public async Task<ActionResult> Import([FromBody] List<Book> books)
+        {
+            var storedData = await _searchService.Search("*", new SearchSettings
+            {
+                From = 0,
+                Size = 100
+            });
+            
+            foreach(var item in storedData)
+            {
+                await _searchService.Delete(item.Id);
+            }
+            
+            var results = new List<Book>();
+
+            foreach (var book in books)
+            {
+                var result = await _searchService.AddOrUpdate(book);
+                results.Add(result);
+            }
+
+            return Ok(results);
         }
 
         /// <summary>

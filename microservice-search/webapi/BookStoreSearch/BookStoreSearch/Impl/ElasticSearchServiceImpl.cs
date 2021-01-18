@@ -17,8 +17,8 @@ namespace BookStoreSearch.Impl
     {
         // https://www.elastic.co/de/blog/a-practical-introduction-to-elasticsearch
         private const string IndexName = "bookindex";
-        private const string BaseUrl = "https://10.100.1.1:9200";
-       // private const string BaseUrl = "https://127.0.0.1:9200";
+        private const string BaseUrl = "https://10.8.7.122:9200";
+        // private const string BaseUrl = "https://127.0.0.1:9200";
         private const int TimeOutSeconds = 20;
         
         /// <summary>
@@ -32,25 +32,33 @@ namespace BookStoreSearch.Impl
             using var client = CreateHttpClient();
             var url = BaseUrl + "/_search?q=" + query + "&from=" + settings.From + "&size=" + settings.Size +
                       "&filter_path=hits.total,hits.max_score,hits.hits._id,hits.hits._source";
-            var result = await client.GetAsync(url);
 
-            if (!result.IsSuccessStatusCode)
+            try
             {
-                throw new BusinessException("Searching items has resulted in an invalid status code.");
+                var result = await client.GetAsync(url);
+
+                if (!result.IsSuccessStatusCode)
+                {
+                    throw new BusinessException("Searching items has resulted in an invalid status code.");
+                }
+
+                var stringContent = await result.Content.ReadAsStringAsync();
+                var jObject = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(stringContent);
+
+                if (jObject["hits"]["total"]["value"].ToObject<Int32>() == 0)
+                {
+                    return new List<T>();
+                }
+
+                var jArray = jObject["hits"]["hits"].Select(e => e["_source"]).ToArray();
+                var results = jArray.Select(e => Newtonsoft.Json.JsonConvert.DeserializeObject<T>(e.ToString()))
+                    .ToList();
+                return results;
             }
-
-            var stringContent = await result.Content.ReadAsStringAsync();
-            var jObject = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(stringContent);
-
-            if (jObject["hits"]["total"]["value"].ToObject<Int32>() == 0)
+            catch (System.Exception e)
             {
-                return new List<T>();
+                throw new BusinessException("Failed.", e);
             }
-            
-            var jArray = jObject["hits"]["hits"].Select(e => e["_source"]).ToArray();
-            var results = jArray.Select(e => Newtonsoft.Json.JsonConvert.DeserializeObject<T>(e.ToString()))
-                .ToList();
-            return results;
         }
 
         /// <summary>

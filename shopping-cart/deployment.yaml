@@ -1,0 +1,55 @@
+# tomcat
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shoppingcart-environment
+  name: shoppingcart-tomcat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat-shoppingcart
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: tomcat-shoppingcart
+    spec:
+      containers:
+        - name: shoppingcart-environment
+          image: cloudcompdocker/shoppingcart-webapi:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+# mysql
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: shoppingcart-environment
+  name: shoppingcart-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-shoppingcart
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: mysql-shoppingcart
+    spec:
+      containers:
+        - name: shoppingcart-environment
+          image: cloudcompdocker/shoppingcart-database:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3306

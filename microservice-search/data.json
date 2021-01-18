@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Harry Potter and the Philosopher's Stone",
+    "Description": "Harry Potter and the Philosopher's Stone is a fantasy novel written by British author J. K. Rowling. The first novel in the Harry Potter series and Rowling's debut novel, it follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh birthday, when he receives a letter of acceptance to Hogwarts School of Witchcraft and Wizardry.",
+    "Author": "J. K. Rowling"
+  },
+  {
+    "Name": "The Last Wish",
+    "Description": "The Last Wish (Polish: Ostatnie życzenie) is the first (in its fictional chronology; published second in original Polish) of the two collections of short stories (the other being Sword of Destiny) preceding the main Witcher Saga, written by Polish fantasy writer Andrzej Sapkowski.",
+    "Author": "Andrzej Sapkowski"
+  },
+  {
+    "Name": "Clean Code",
+    "Description": "A Handbook of Agile Software Craftsmanship",
+    "Author": "Robert C. Martin"
+  }
+]
