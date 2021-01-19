@@ -340,6 +340,8 @@ One major difference is there to point out. As job we can automatically build th
 ...
 ~~~
 
-After the build succeeds the webservice is available under   
-`http://35.239.83.61/shopping-cart-1.0/ShoppingCart?action=<parameter>`
-=======
+After the build succeeds the webservice is available under  
+
+~~~
+http://35.239.83.61/shopping-cart-1.0/ShoppingCart?action=<parameter>
+~~~
