@@ -345,3 +345,91 @@ After the build succeeds the webservice is available under
 ~~~
 http://35.239.83.61/shopping-cart-1.0/ShoppingCart?action=<parameter>
 ~~~
+
+## Microservice Search
+
+As the name already suggests, this microservice handles the search capabilities for the bookstore. Specifically, this 
+involves the search bar for full text search for individual books. In order achieve this goal, the following components were created:
+
+* ASP.NET Core Web Api C#
+* Elastic Cloud on Kubernetes
+
+![search-diagramm](/microservice-search/search-gke.png)
+
+This diagram shows the deployed microservice in the Google Kubernetes Engine. It is public accessible via an Ipv4 address and 
+a specific port. If an HTTP request is arriving at this loadbalancer, the request is routed to the ASP.NET Core webapi. Such a request may look like this:
+
+```console
+GET /api/search?query=Witcher
+```
+
+Internally, the webapi requests the data from an Elastic Search database by sending a HTTP request to the kubernetes service 
+elastic-search-http. Once the webapi gets the data from a database, a response it generated which is being used by the frontend.
+Such a response looks like this:
+
+```console
+200 - OK
+[
+    {
+        "id": "83a6b90b-d38b-4bac-96a5-56caadc9e814",
+        "name": "The Last Wish",
+        "description": "The Last Wish (Polish: Ostatnie ?yczenie) is the first (in its fictional chronology; published second in original Polish) of the two collections of short stories (the other being Sword of Destiny) preceding the main Witcher Saga, written by Polish fantasy writer Andrzej Sapkowski.",
+        "author": "Andrzej Sapkowski"
+    }
+]
+```
+
+### Docker image
+
+```console
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "BookStoreSearch.dll"]
+```
+
+This DockerFile contains a basic ASP .NET Core configuration to run the web application. 
+
+The component Elastic Cloud on Kubernetes does not have its own custom DockerFile. Here, we use the
+default configuration and directly apply it to Kubernetes.
+
+### Kubernetes
+
+The services and deployments are similarly structured as the shopping cart microservice. One of the major
+differences however is one additional file configuring the Elastic Search database.
+
+```console
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  namespace: search-environment
+  name: elasticsearch
+spec:
+  version: 7.10.1
+  http:
+    service:
+      spec:
+        clusterIP: 10.8.7.122
+        type: ClusterIP
+...
+```
+
+This is specific to Elastic Search and can be configured using their documentation. The static clusterIP is 
+important to be able to access the database.
+
+### Github Actions
+
+The build and deployment is configured using a Github workflow defined in the file ``.github/workflows/search.yml``. One of
+the differences compared to the other services is that the webapi is directly built inside of the docker image instead
+of copying the artifact into it. Also, the Elastic Cloud on Kubernetes requires specific configuration as seen below. 
+Please notice that you should not apply a remote file (all-in-one.yaml) on a real production project. Download it once and check 
+it into the repository. 
+
+```console
+...
+kubectl apply -f ./microservice-search/namespace.yaml
+kubectl apply -f https://download.elastic.co/downloads/eck/1.3.0/all-in-one.yaml
+kubectl apply -f ./microservice-search/elasticsearch.yaml
+kubectl apply -f ./microservice-search/service.yaml
+kubectl apply -f ./microservice-search/deployment.yaml
+```
