@@ -13,7 +13,7 @@ The aim of this project was to automate the entire process from source-code chan
 we have worked with almost all of the mentioned topics from the lecture: Docker, Kubernetes, CI (Github Actions).
 
 For this, we have developed a web application called bookstore where you can search for books and add them into your
-shopping cart. This is a simplified version of a real bookstore as this is not a programming lecture, so we instead focused on the things we have learned during the lecture
+shopping cart. This is a simplified version of a real bookstore as this is not a programming lecture, so we instead focused on the things we have learned during the lecture.
 
 ![alt tag](frontend-pic.png)
 *Screenshot of the BookStore Frontend*
@@ -34,13 +34,14 @@ In the end the final workload of each team member involved performing the follow
 
 * Develop their own microservice using a different programming language together with Docker
 * Create yaml files to deploy it into Kubernetes
-* Create Github Actions workflow file to only build their own microservice on push.
-* Deploy their Kubernetes namespace into Google Kubernetes engine.
-* Update Github Actions for Continuous Deployment on push.
+* Create Github Actions workflow file to only build their own microservice on push
+* Deploy their Kubernetes namespace into Google Kubernetes engine
+* Update Github Actions for Continuous Deployment on push
 
 Eventually, the deployed application looks like this:
 
 ![diagram](deployedapplicationgke.png)
+
 *The final application deployed into Google Kubernetes engine*
 
 ## Microservice Frontend
