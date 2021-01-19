@@ -199,8 +199,6 @@ At the and we start the rollout.
           kubectl rollout restart -f ./frontend-bookstore/deployment.yaml --namespace frontend-environment
 ```
 
-## Microservice Search
-
 ## Microservice Shopping Cart
 
 The microservice shopping cart consists of two major components.
