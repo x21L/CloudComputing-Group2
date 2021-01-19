@@ -10,9 +10,9 @@
 ## Overview
 
 The aim of this project was to automate the entire process from source-code change to GoogleCloud deployment. Essentially,
-we worked with almost all of the mentioned topics from the lecture: Docker, Kubernetes, CI (Github Actions).
+we have worked with almost all of the mentioned topics from the lecture: Docker, Kubernetes, CI (Github Actions).
 
-For this we have developed a web application a so-called bookstore where you can search for books and add them into your
+For this, we have developed a web application called bookstore where you can search for books and add them into your
 shopping cart. This is a simplified version of a real bookstore as this is not a programming lecture, so we instead focused on the things we have learned during the lecture
 
 ![alt tag](frontend-pic.png)
