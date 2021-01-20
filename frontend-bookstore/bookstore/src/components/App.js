@@ -122,7 +122,7 @@ const App = () => {
   return (
     <div className="App">
       <div>
-      <Header text="Best-Book-Store"/>
+      <Header text="Book-Store"/>
       <button id={"shopButton_" + shopOpen} onClick={toggleShop}></button>
     </div>
     {!shopOpen ? (
